@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <title>New York Map</title>
+    <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript" src="https://d3js.org/topojson.v2.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        svg { border: 1px solid #ccc; margin-top: 10px; }
+        path:hover { cursor: pointer; }
+        .tooltip {
+            position: absolute;
+            background: white;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            pointer-events: none;
+            opacity: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .tooltip-title {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        .tooltip-borough {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .tooltip-health {
+            font-size: 0.9em;
+            margin-top: 4px;
+            color: #666;
+        }
+        button#resetZoom {
+            padding: 8px 16px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        button#resetZoom:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Map of New York Neighborhoods</h2>
+    <button id="resetZoom">Reset Zoom</button>
+    <svg id="map" width="800" height="600"></svg>
+    <script>
+        console.log("D3 version:", d3.version);
+        const width = 800, height = 600;
+        const svg = d3.select("#map")
+            .attr("width", width)
+            .attr("height", height);
+
+        const g = svg.append("g");
+
+        const tooltip = d3.select("body")
+            .append("div")
+            .attr("class", "tooltip");
+
+        const projection = d3.geoMercator()
+            .center([-74.006, 40.7128])
+            .scale(60000)
+            .translate([width / 2, height / 2]);
+
+        const path = d3.geoPath().projection(projection);
+
+        const zoom = d3.zoom()
+            .scaleExtent([1, 8])
+            .on("zoom", function() {
+                g.attr("transform", d3.event.transform);
+            });
+
+        svg.call(zoom);
+
+        function resetZoom() {
+            svg.transition()
+                .duration(750)
+                .call(zoom.transform, d3.zoomIdentity);
+        }
+
+        d3.select("#resetZoom").on("click", resetZoom);
+
+        // Color scale based on boroughs
+        const boroughColors = {
+            "Manhattan": "#1f77b4",
+            "Brooklyn": "#2ca02c",
+            "Queens": "#ff7f0e",
+            "Bronx": "#d62728",
+            "Staten Island": "#9467bd"
+        };
+
+        // Load both TopoJSON and CSV data
+        Promise.all([
+            d3.json("nyct2010.json"),  // TopoJSON
+            d3.csv("Trees_Quantified.csv")  // CSV
+        ]).then(([geoData, csvData]) => {
+
+            // Debugging: Print the first few rows of the CSV data
+            console.log("CSV Data (first 5 rows):", csvData.slice(0, 5));
+
+            // Clean up and check census tract data
+            csvData.forEach(d => {
+                // Remove '.0' from census tract if it appears
+                d['census tract'] = d['census tract'].replace('.0', '');  // Remove any '.0' from the tract number
+                d['census tract'] = d['census tract'].trim();  // Clean up any extra spaces
+                d.health = +d.health;  // Ensure health is numeric
+            });
+
+            // Debugging: Check the cleaned data
+            console.log("Cleaned CSV Data (first 5 rows):", csvData.slice(0, 5));
+
+            // Create a mapping from census tract to health data
+            const healthDataMap = d3.nest()
+                .key(d => d['census tract'])  // Use 'census tract' as the key from the CSV
+                .rollup(leaves => {
+                    const meanHealth = d3.mean(leaves, d => d.health);  // Calculate mean health
+                    return meanHealth;
+                })
+                .object(csvData);
+
+            // Debugging: Check healthDataMap
+            console.log("Health Data Map:", healthDataMap);
+
+            // Extract features from the TopoJSON
+            const features = topojson.feature(geoData, geoData.objects.nyct2010reproj).features;
+
+            // Merge CSV data with GeoJSON data based on 'census_tract' (CSV) and 'CTLabel' (GeoJSON)
+            features.forEach(feature => {
+                const tract = feature.properties.CTLabel.trim();  // Clean up whitespace from CTLabel
+                const health = healthDataMap[tract] || 'No data';  // Get health data or "No data"
+                feature.properties.meanHealth = health;
+            });
+
+            // Debugging: Check merged data
+            console.log("Merged GeoJSON Data:", features.slice(0, 5));
+
+            // Render the map with updated data
+            g.selectAll("path")
+                .data(features)
+                .enter().append("path")
+                .attr("d", path)
+                .attr("fill", function(d) {
+                    return boroughColors[d.properties.BoroName] || "#69b3a2";
+                })
+                .attr("stroke", "#fff")
+                .attr("stroke-width", "0.5")
+                .on("mouseover", function(d) {
+                    const el = d3.select(this);
+                    el.attr("stroke-width", "2")
+                       .style("filter", "brightness(0.9)");
+
+                    tooltip.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    
+                    // Get health data for the neighborhood
+                    const health = d.properties.meanHealth;
+
+                    // Format tooltip content with health data
+                    const tooltipContent = `
+                        <div class="tooltip-title">${d.properties.NTAName}</div>
+                        <div class="tooltip-borough">${d.properties.BoroName}</div>
+                        <div class="tooltip-id">ID: ${d.properties.NTACode}</div>
+                        <div class="tooltip-health"><strong>Mean Health:</strong> ${health}</div>
+                    `;
+                    
+                    tooltip.html(tooltipContent)
+                        .style("left", (d3.event.pageX + 5) + "px")
+                        .style("top", (d3.event.pageY - 28) + "px");
+                })
+                .on("mouseout", function(d) {
+                    const el = d3.select(this);
+                    el.attr("stroke-width", "0.5")
+                      .style("filter", null);
+
+                    tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+                })
+                .on("click", function(d) {
+                    d3.event.stopPropagation();
+                    
+                    const bounds = path.bounds(d);
+                    const dx = bounds[1][0] - bounds[0][0];
+                    const dy = bounds[1][1] - bounds[0][1];
+                    const x = (bounds[0][0] + bounds[1][0]) / 2;
+                    const y = (bounds[0][1] + bounds[1][1]) / 2;
+                    const scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height)));
+                    const translate = [width / 2 - scale * x, height / 2 - scale * y];
+
+                    svg.transition()
+                        .duration(750)
+                        .call(zoom.transform, 
+                            d3.zoomIdentity
+                                .translate(translate[0], translate[1])
+                                .scale(scale)
+                        );
+                });
+        }).catch(error => {
+            console.error("Error loading data:", error);
+        });
+
+    </script>
+</body>
+</html>
