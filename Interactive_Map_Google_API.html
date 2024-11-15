@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New York Map with Google Maps</title>
+    <style>
+        #map {
+            height: 600px;
+            width: 800px;
+        }
+        .overlay {
+            position: absolute;
+            pointer-events: none;
+        }
+        .neighborhood {
+            fill-opacity: 0.4;
+            stroke: white;
+            stroke-width: 1px;
+            pointer-events: visibleFill;
+            cursor: pointer;
+            vector-effect: non-scaling-stroke;
+        }
+        .neighborhood:hover {
+            fill-opacity: 0.7;
+            stroke-width: 2px;
+        }
+        .tooltip {
+            position: fixed;
+            background: white;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 9999;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: opacity 0.2s;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            max-width: 300px;
+        }
+        .tooltip strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h2>New York City Neighborhoods</h2>
+    <div id="map"></div>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+
+    <script>
+        function loadGoogleMaps() {
+            const script = document.createElement('script');
+            script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBk7SlPBT8xcER27B6VahMdKtJ2a_qGXnM&loading=async&callback=initMap`;
+            script.async = true;
+            script.defer = true;
+            document.head.appendChild(script);
+        }
+
+        function initMap() {
+            const map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 40.7128, lng: -74.006 },
+                zoom: 11,
+                styles: [{
+                    featureType: 'administrative.neighborhood',
+                    elementType: 'labels',
+                    stylers: [{ visibility: 'off' }]
+                }]
+            });
+
+            class NeighborhoodOverlay extends google.maps.OverlayView {
+                constructor(data) {
+                    super();
+                    this.data = data;
+                    this.drawRequested = false;
+                }
+
+                onAdd() {
+                    // Create overlay container
+                    this.layer = d3.select(this.getPanes().overlayMouseTarget)
+                        .append("div")
+                        .attr("class", "overlay");
+
+                    // Create SVG element
+                    this.svg = this.layer.append("svg")
+                        .style("position", "absolute");
+
+                    // Create tooltip if it doesn't exist
+                    if (!d3.select("body").select(".tooltip").size()) {
+                        this.tooltip = d3.select("body").append("div")
+                            .attr("class", "tooltip")
+                            .style("opacity", 0);
+                    }
+
+                    // Initialize features
+                    this.features = topojson.feature(
+                        this.data, 
+                        this.data.objects.nyct2010reproj
+                    ).features;
+
+                    this.draw();
+                }
+
+                draw() {
+                    const projection = this.getProjection();
+                    if (!projection) return;
+
+                    const bounds = map.getBounds();
+                    const sw = bounds.getSouthWest();
+                    const ne = bounds.getNorthEast();
+                    const swPixel = projection.fromLatLngToDivPixel(sw);
+                    const nePixel = projection.fromLatLngToDivPixel(ne);
+
+                    // Set container size and position
+                    this.layer
+                        .style("left", swPixel.x + "px")
+                        .style("top", nePixel.y + "px")
+                        .style("width", (nePixel.x - swPixel.x) + "px")
+                        .style("height", (swPixel.y - nePixel.y) + "px");
+
+                    this.svg
+                        .style("width", (nePixel.x - swPixel.x) + "px")
+                        .style("height", (swPixel.y - nePixel.y) + "px");
+
+                    const transform = {
+                        point: (function(projection, swPixel, nePixel) {
+                            return function(x, y) {
+                                const latLng = new google.maps.LatLng(y, x);
+                                const pixel = projection.fromLatLngToDivPixel(latLng);
+                                this.stream.point(pixel.x - swPixel.x, pixel.y - nePixel.y);
+                            };
+                        })(projection, swPixel, nePixel)
+                    };
+
+                    const path = d3.geoPath().projection(d3.geoTransform(transform));
+
+                    const boroughColors = {
+                        "Manhattan": "#1f77b4",
+                        "Brooklyn": "#2ca02c",
+                        "Queens": "#ff7f0e",
+                        "Bronx": "#d62728",
+                        "Staten Island": "#9467bd"
+                    };
+
+                    // Update paths
+                    const paths = this.svg.selectAll("path")
+                        .data(this.features);
+
+                    // Remove old paths
+                    paths.exit().remove();
+
+                    // Add new paths
+                    const enter = paths.enter()
+                        .append("path")
+                        .attr("class", "neighborhood");
+
+                    // Update all paths
+                    const that = this;
+                    enter.merge(paths)
+                        .attr("d", path)
+                        .style("fill", d => boroughColors[d.properties.BoroName])
+                        .on("mousemove", function(d) {
+                            const [x, y] = d3.mouse(document.body);
+                            that.tooltip
+                                .style("opacity", 0.9)
+                                .html(`
+                                    <strong>${d.properties.NTAName}</strong>
+                                    <div>${d.properties.BoroName}</div>
+                                    <div>Census Track: ${d.properties.CTLabel}</div>
+                                `)
+                                .style("left", (x + 10) + "px")
+                                .style("top", (y - 10) + "px");
+                        })
+                        .on("mouseout", function() {
+                            that.tooltip.style("opacity", 0);
+                        });
+                }
+
+                onRemove() {
+                    if (this.layer) {
+                        this.layer.remove();
+                    }
+                    if (this.tooltip) {
+                        this.tooltip.remove();
+                    }
+                }
+            }
+
+            // Load data and create overlay
+            d3.json("nyct2010.json")
+                .then(data => {
+                    console.log("Data loaded successfully");
+                    const overlay = new NeighborhoodOverlay(data);
+                    overlay.setMap(map);
+
+                    // Throttle the bounds_changed event
+                    let timeout;
+                    google.maps.event.addListener(map, 'bounds_changed', () => {
+                        if (timeout) clearTimeout(timeout);
+                        timeout = setTimeout(() => {
+                            overlay.draw();
+                        }, 50);
+                    });
+                })
+                .catch(error => {
+                    console.error("Error loading data:", error);
+                });
+        }
+
+        window.initMap = initMap;
+        loadGoogleMaps();
+    </script>
+</body>
+</html>
