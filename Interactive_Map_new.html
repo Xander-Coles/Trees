@@ -105,7 +105,6 @@
             // Clean up and check census tract data
             csvData.forEach(d => {
                 // Remove '.0' from census tract if it appears
-                d['census tract'] = d['census tract'].replace('.0', '');  // Remove any '.0' from the tract number
                 d['census tract'] = d['census tract'].trim();  // Clean up any extra spaces
                 d.health = +d.health;  // Ensure health is numeric
             });
@@ -113,9 +112,9 @@
             // Debugging: Check the cleaned data
             console.log("Cleaned CSV Data (first 5 rows):", csvData.slice(0, 5));
 
-            // Create a mapping from census tract to health data
+            // Create a mapping from census tract and borough to health data
             const healthDataMap = d3.nest()
-                .key(d => d['census tract'])  // Use 'census tract' as the key from the CSV
+                .key(d => d['census tract'] + '_' + d['borough'])  // Use both 'census tract' and 'borough' as the key
                 .rollup(leaves => {
                     const meanHealth = d3.mean(leaves, d => d.health);  // Calculate mean health
                     return meanHealth;
@@ -128,10 +127,12 @@
             // Extract features from the TopoJSON
             const features = topojson.feature(geoData, geoData.objects.nyct2010reproj).features;
 
-            // Merge CSV data with GeoJSON data based on 'census_tract' (CSV) and 'CTLabel' (GeoJSON)
+            // Merge CSV data with GeoJSON data based on 'census tract' and 'borough'
             features.forEach(feature => {
                 const tract = feature.properties.CTLabel.trim();  // Clean up whitespace from CTLabel
-                const health = healthDataMap[tract] || 'No data';  // Get health data or "No data"
+                const borough = feature.properties.BoroName.trim();  // Clean up whitespace from BoroName
+                const key = tract + '_' + borough;  // Create the key using both census tract and borough
+                const health = healthDataMap[key] || 'No data';  // Get health data or "No data"
                 feature.properties.meanHealth = health;
             });
 
@@ -164,7 +165,7 @@
                     const tooltipContent = `
                         <div class="tooltip-title">${d.properties.NTAName}</div>
                         <div class="tooltip-borough">${d.properties.BoroName}</div>
-                        <div class="tooltip-id">ID: ${d.properties.NTACode}</div>
+                        <div class="tooltip-id">ID: ${d.properties.CTLabel}</div>
                         <div class="tooltip-health"><strong>Mean Health:</strong> ${health}</div>
                     `;
                     
