@@ -3,9 +3,29 @@
 <head>
     <title>New York Map with Google Maps</title>
     <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
         #map {
             height: 600px;
             width: 800px;
+            position: relative;
+        }
+        #map.fullscreen {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            z-index: 9000;
+            margin: 0 !important;
+            padding: 0 !important;
         }
         .overlay {
             position: absolute;
@@ -15,7 +35,7 @@
             fill-opacity: 0.4;
             stroke: white;
             stroke-width: 1px;
-            pointer-events: visibleFill;
+            pointer-events: all !important;
             cursor: pointer;
             vector-effect: non-scaling-stroke;
         }
@@ -23,42 +43,105 @@
             fill-opacity: 0.7;
             stroke-width: 2px;
         }
-        .tooltip {
+        #fixed-tooltip {
             position: fixed;
+            z-index: 100000;
             background: white;
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #ccc;
             border-radius: 4px;
             pointer-events: none;
-            opacity: 0;
-            z-index: 9999;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: opacity 0.2s;
             font-family: Arial, sans-serif;
             font-size: 14px;
             max-width: 300px;
+            line-height: 1.4;
         }
-        .tooltip strong {
+        #fixed-tooltip strong {
             display: block;
             margin-bottom: 5px;
             color: #333;
+            font-size: 15px;
         }
         .tooltip-health {
-            margin-top: 5px;
-            padding-top: 5px;
+            margin-top: 8px;
+            padding-top: 8px;
             border-top: 1px solid #eee;
             color: #666;
+        }
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 9999;
         }
     </style>
 </head>
 <body>
     <h2>New York City Neighborhoods</h2>
     <div id="map"></div>
+    <div id="fixed-tooltip" style="display: none;"></div>
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
 
     <script>
+        // Add document-level event listeners
+        document.addEventListener('mousemove', function(e) {
+            const target = e.target;
+            if (target.tagName === 'path' && target.classList.contains('neighborhood')) {
+                const tooltip = document.getElementById('fixed-tooltip');
+                if (!tooltip) return;
+
+                const properties = JSON.parse(target.getAttribute('data-feature'));
+                
+                const content = `
+                    <strong>${properties.NTAName}</strong>
+                    <div>${properties.BoroName}</div>
+                    <div>Census Track: ${properties.CTLabel}</div>
+                    <div class="tooltip-health">
+                        <strong>Mean Tree Health:</strong> ${
+                            typeof properties.meanHealth === 'number' 
+                                ? properties.meanHealth.toFixed(2) 
+                                : properties.meanHealth
+                        }
+                    </div>
+                `;
+                
+                tooltip.innerHTML = content;
+                tooltip.style.display = 'block';
+
+                let left = e.clientX + 10;
+                let top = e.clientY + 10;
+
+                const tooltipRect = tooltip.getBoundingClientRect();
+
+                if (left + tooltipRect.width > window.innerWidth) {
+                    left = e.clientX - tooltipRect.width - 10;
+                }
+                if (top + tooltipRect.height > window.innerHeight) {
+                    top = e.clientY - tooltipRect.height - 10;
+                }
+
+                tooltip.style.left = `${left}px`;
+                tooltip.style.top = `${top}px`;
+            }
+        });
+
+        document.addEventListener('mouseout', function(e) {
+            if (e.target.tagName === 'path' && e.target.classList.contains('neighborhood')) {
+                const tooltip = document.getElementById('fixed-tooltip');
+                if (tooltip) {
+                    tooltip.style.display = 'none';
+                }
+            }
+        });
+
         function loadGoogleMaps() {
             const script = document.createElement('script');
             script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBk7SlPBT8xcER27B6VahMdKtJ2a_qGXnM&loading=async&callback=initMap`;
@@ -68,6 +151,7 @@
         }
 
         function initMap() {
+            let overlay;
             const map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: 40.7128, lng: -74.006 },
                 zoom: 11,
@@ -75,9 +159,24 @@
                     featureType: 'administrative.neighborhood',
                     elementType: 'labels',
                     stylers: [{ visibility: 'off' }]
-                }]
+                }],
+                fullscreenControl: true,
+                mapTypeControl: true,
+                streetViewControl: true,
+                zoomControl: true
             });
 
+            google.maps.event.addListener(map, 'fullscreenChanged', () => {
+                const mapDiv = document.getElementById('map');
+                if (document.fullscreenElement) {
+                    mapDiv.classList.add('fullscreen');
+                } else {
+                    mapDiv.classList.remove('fullscreen');
+                }
+                if (overlay) {
+                    overlay.draw();
+                }
+            });
             class NeighborhoodOverlay extends google.maps.OverlayView {
                 constructor(data, healthData) {
                     super();
@@ -94,14 +193,8 @@
 
                     // Create SVG element
                     this.svg = this.layer.append("svg")
-                        .style("position", "absolute");
-
-                    // Create tooltip if it doesn't exist
-                    if (!d3.select("body").select(".tooltip").size()) {
-                        this.tooltip = d3.select("body").append("div")
-                            .attr("class", "tooltip")
-                            .style("opacity", 0);
-                    }
+                        .style("position", "absolute")
+                        .style("pointer-events", "auto");
 
                     // Initialize features with health data
                     this.features = topojson.feature(
@@ -138,8 +231,8 @@
                         .style("height", (swPixel.y - nePixel.y) + "px");
 
                     this.svg
-                        .style("width", (nePixel.x - swPixel.x) + "px")
-                        .style("height", (swPixel.y - nePixel.y) + "px");
+                        .style("width", "100%")
+                        .style("height", "100%");
 
                     const transform = {
                         point: (function(projection, swPixel, nePixel) {
@@ -174,31 +267,13 @@
                         .attr("class", "neighborhood");
 
                     // Update all paths
-                    const that = this;
                     enter.merge(paths)
                         .attr("d", path)
                         .style("fill", d => boroughColors[d.properties.BoroName])
-                        .on("mousemove", function(d) {
-                            const [x, y] = d3.mouse(document.body);
-                            that.tooltip
-                                .style("opacity", 0.9)
-                                .html(`
-                                    <strong>${d.properties.NTAName}</strong>
-                                    <div>${d.properties.BoroName}</div>
-                                    <div>Census Track: ${d.properties.CTLabel}</div>
-                                    <div class="tooltip-health">
-                                        <strong>Mean Tree Health:</strong> ${
-                                            typeof d.properties.meanHealth === 'number' 
-                                                ? d.properties.meanHealth.toFixed(2) 
-                                                : d.properties.meanHealth
-                                        }
-                                    </div>
-                                `)
-                                .style("left", (x + 10) + "px")
-                                .style("top", (y - 10) + "px");
-                        })
-                        .on("mouseout", function() {
-                            that.tooltip.style("opacity", 0);
+                        .style("pointer-events", "all")
+                        .each(function(d) {
+                            // Store the feature data as a data attribute
+                            d3.select(this).attr('data-feature', JSON.stringify(d.properties));
                         });
                 }
 
@@ -206,11 +281,14 @@
                     if (this.layer) {
                         this.layer.remove();
                     }
-                    if (this.tooltip) {
-                        this.tooltip.remove();
-                    }
                 }
             }
+
+            // Show loading indicator
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'loading';
+            loadingDiv.textContent = 'Loading data...';
+            map.getDiv().appendChild(loadingDiv);
 
             // Load both datasets
             Promise.all([
@@ -233,8 +311,11 @@
                     })
                     .object(csvData);
 
+                // Remove loading indicator
+                loadingDiv.remove();
+
                 // Create overlay with both datasets
-                const overlay = new NeighborhoodOverlay(data, healthDataMap);
+                overlay = new NeighborhoodOverlay(data, healthDataMap);
                 overlay.setMap(map);
 
                 // Add listener for bounds changes
@@ -248,6 +329,8 @@
             })
             .catch(error => {
                 console.error("Error loading data:", error);
+                loadingDiv.textContent = 'Error loading data. Please try again.';
+                setTimeout(() => loadingDiv.remove(), 3000);
             });
         }
 
