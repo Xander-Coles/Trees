@@ -32,7 +32,7 @@
             pointer-events: none;
         }
         .neighborhood {
-            fill-opacity: 0.4;
+            fill-opacity: 0.7;
             stroke: white;
             stroke-width: 1px;
             pointer-events: all !important;
@@ -40,7 +40,7 @@
             vector-effect: non-scaling-stroke;
         }
         .neighborhood:hover {
-            fill-opacity: 0.7;
+            fill-opacity: 0.9;
             stroke-width: 2px;
         }
         #fixed-tooltip {
@@ -69,21 +69,10 @@
             border-top: 1px solid #eee;
             color: #666;
         }
-        .loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            z-index: 9999;
-        }
     </style>
 </head>
 <body>
-    <h2>New York City Neighborhoods</h2>
+    <h2>New York City Tree Health by Census Tract</h2>
     <div id="map"></div>
     <div id="fixed-tooltip" style="display: none;"></div>
 
@@ -91,7 +80,6 @@
     <script src="https://d3js.org/topojson.v2.min.js"></script>
 
     <script>
-        // Add document-level event listeners
         document.addEventListener('mousemove', function(e) {
             const target = e.target;
             if (target.tagName === 'path' && target.classList.contains('neighborhood')) {
@@ -144,7 +132,7 @@
 
         function loadGoogleMaps() {
             const script = document.createElement('script');
-            script.src = `https://maps.googleapis.com/maps/api/js?key=[Your_API_KEY]&loading=async&callback=initMap`;
+            script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyChegNSgoVHs5jxVnXxnxBDYpXo3VjW3cQ&loading=async&callback=initMap`;
             script.async = true;
             script.defer = true;
             document.head.appendChild(script);
@@ -177,6 +165,7 @@
                     overlay.draw();
                 }
             });
+
             class NeighborhoodOverlay extends google.maps.OverlayView {
                 constructor(data, healthData) {
                     super();
@@ -186,29 +175,33 @@
                 }
 
                 onAdd() {
-                    // Create overlay container
                     this.layer = d3.select(this.getPanes().overlayMouseTarget)
                         .append("div")
                         .attr("class", "overlay");
 
-                    // Create SVG element
                     this.svg = this.layer.append("svg")
                         .style("position", "absolute")
                         .style("pointer-events", "auto");
 
-                    // Initialize features with health data
                     this.features = topojson.feature(
                         this.data, 
                         this.data.objects.nyct2010reproj
                     ).features;
 
-                    // Merge health data with features
                     this.features.forEach(feature => {
                         const tract = feature.properties.CTLabel.trim();
                         const borough = feature.properties.BoroName.trim();
                         const key = tract + '_' + borough;
-                        feature.properties.meanHealth = this.healthData[key] || 'No data';
+                        feature.properties.meanHealth = this.healthData[key] || null;
                     });
+
+                    // Create color scale for health values
+                    const healthValues = this.features
+                        .map(f => f.properties.meanHealth)
+                        .filter(v => v !== null);
+                    
+                    this.colorScale = d3.scaleSequential(d3.interpolateRdYlGn)
+                        .domain([d3.min(healthValues), d3.max(healthValues)]);
 
                     this.draw();
                 }
@@ -223,7 +216,6 @@
                     const swPixel = projection.fromLatLngToDivPixel(sw);
                     const nePixel = projection.fromLatLngToDivPixel(ne);
 
-                    // Set container size and position
                     this.layer
                         .style("left", swPixel.x + "px")
                         .style("top", nePixel.y + "px")
@@ -246,33 +238,24 @@
 
                     const path = d3.geoPath().projection(d3.geoTransform(transform));
 
-                    const boroughColors = {
-                        "Manhattan": "#1f77b4",
-                        "Brooklyn": "#2ca02c",
-                        "Queens": "#ff7f0e",
-                        "Bronx": "#d62728",
-                        "Staten Island": "#9467bd"
-                    };
-
-                    // Update paths
                     const paths = this.svg.selectAll("path")
                         .data(this.features);
 
-                    // Remove old paths
                     paths.exit().remove();
 
-                    // Add new paths
                     const enter = paths.enter()
                         .append("path")
                         .attr("class", "neighborhood");
 
-                    // Update all paths
                     enter.merge(paths)
                         .attr("d", path)
-                        .style("fill", d => boroughColors[d.properties.BoroName])
+                        .style("fill", d => {
+                            return d.properties.meanHealth !== null 
+                                ? this.colorScale(d.properties.meanHealth) 
+                                : "#ccc";  // Gray for areas with no data
+                        })
                         .style("pointer-events", "all")
                         .each(function(d) {
-                            // Store the feature data as a data attribute
                             d3.select(this).attr('data-feature', JSON.stringify(d.properties));
                         });
                 }
@@ -284,26 +267,17 @@
                 }
             }
 
-            // Show loading indicator
-            const loadingDiv = document.createElement('div');
-            loadingDiv.className = 'loading';
-            loadingDiv.textContent = 'Loading data...';
-            map.getDiv().appendChild(loadingDiv);
-
-            // Load both datasets
             Promise.all([
                 d3.json("nyct2010.json"),
                 d3.csv("Trees_Quantified.csv")
             ]).then(([data, csvData]) => {
                 console.log("Data loaded successfully");
                 
-                // Clean up and process CSV data
                 csvData.forEach(d => {
                     d['census tract'] = d['census tract'].trim();
                     d.health = +d.health;
                 });
 
-                // Create health data mapping
                 const healthDataMap = d3.nest()
                     .key(d => d['census tract'] + '_' + d['borough'])
                     .rollup(leaves => {
@@ -311,14 +285,9 @@
                     })
                     .object(csvData);
 
-                // Remove loading indicator
-                loadingDiv.remove();
-
-                // Create overlay with both datasets
                 overlay = new NeighborhoodOverlay(data, healthDataMap);
                 overlay.setMap(map);
 
-                // Add listener for bounds changes
                 let timeout;
                 google.maps.event.addListener(map, 'bounds_changed', () => {
                     if (timeout) clearTimeout(timeout);
@@ -329,8 +298,6 @@
             })
             .catch(error => {
                 console.error("Error loading data:", error);
-                loadingDiv.textContent = 'Error loading data. Please try again.';
-                setTimeout(() => loadingDiv.remove(), 3000);
             });
         }
 
