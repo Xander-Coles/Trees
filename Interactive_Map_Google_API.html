@@ -43,6 +43,12 @@
             margin-bottom: 5px;
             color: #333;
         }
+        .tooltip-health {
+            margin-top: 5px;
+            padding-top: 5px;
+            border-top: 1px solid #eee;
+            color: #666;
+        }
     </style>
 </head>
 <body>
@@ -73,9 +79,10 @@
             });
 
             class NeighborhoodOverlay extends google.maps.OverlayView {
-                constructor(data) {
+                constructor(data, healthData) {
                     super();
                     this.data = data;
+                    this.healthData = healthData;
                     this.drawRequested = false;
                 }
 
@@ -96,11 +103,19 @@
                             .style("opacity", 0);
                     }
 
-                    // Initialize features
+                    // Initialize features with health data
                     this.features = topojson.feature(
                         this.data, 
                         this.data.objects.nyct2010reproj
                     ).features;
+
+                    // Merge health data with features
+                    this.features.forEach(feature => {
+                        const tract = feature.properties.CTLabel.trim();
+                        const borough = feature.properties.BoroName.trim();
+                        const key = tract + '_' + borough;
+                        feature.properties.meanHealth = this.healthData[key] || 'No data';
+                    });
 
                     this.draw();
                 }
@@ -171,6 +186,13 @@
                                     <strong>${d.properties.NTAName}</strong>
                                     <div>${d.properties.BoroName}</div>
                                     <div>Census Track: ${d.properties.CTLabel}</div>
+                                    <div class="tooltip-health">
+                                        <strong>Mean Tree Health:</strong> ${
+                                            typeof d.properties.meanHealth === 'number' 
+                                                ? d.properties.meanHealth.toFixed(2) 
+                                                : d.properties.meanHealth
+                                        }
+                                    </div>
                                 `)
                                 .style("left", (x + 10) + "px")
                                 .style("top", (y - 10) + "px");
@@ -190,25 +212,43 @@
                 }
             }
 
-            // Load data and create overlay
-            d3.json("nyct2010.json")
-                .then(data => {
-                    console.log("Data loaded successfully");
-                    const overlay = new NeighborhoodOverlay(data);
-                    overlay.setMap(map);
-
-                    // Throttle the bounds_changed event
-                    let timeout;
-                    google.maps.event.addListener(map, 'bounds_changed', () => {
-                        if (timeout) clearTimeout(timeout);
-                        timeout = setTimeout(() => {
-                            overlay.draw();
-                        }, 50);
-                    });
-                })
-                .catch(error => {
-                    console.error("Error loading data:", error);
+            // Load both datasets
+            Promise.all([
+                d3.json("nyct2010.json"),
+                d3.csv("Trees_Quantified.csv")
+            ]).then(([data, csvData]) => {
+                console.log("Data loaded successfully");
+                
+                // Clean up and process CSV data
+                csvData.forEach(d => {
+                    d['census tract'] = d['census tract'].trim();
+                    d.health = +d.health;
                 });
+
+                // Create health data mapping
+                const healthDataMap = d3.nest()
+                    .key(d => d['census tract'] + '_' + d['borough'])
+                    .rollup(leaves => {
+                        return d3.mean(leaves, d => d.health);
+                    })
+                    .object(csvData);
+
+                // Create overlay with both datasets
+                const overlay = new NeighborhoodOverlay(data, healthDataMap);
+                overlay.setMap(map);
+
+                // Add listener for bounds changes
+                let timeout;
+                google.maps.event.addListener(map, 'bounds_changed', () => {
+                    if (timeout) clearTimeout(timeout);
+                    timeout = setTimeout(() => {
+                        overlay.draw();
+                    }, 50);
+                });
+            })
+            .catch(error => {
+                console.error("Error loading data:", error);
+            });
         }
 
         window.initMap = initMap;
