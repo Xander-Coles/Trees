@@ -27,6 +27,16 @@
             margin: 0 !important;
             padding: 0 !important;
         }
+        .controls {
+            margin-bottom: 10px;
+            font-family: Arial, sans-serif;
+        }
+        .controls select {
+            padding: 8px;
+            font-size: 14px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
         .overlay {
             position: absolute;
             pointer-events: none;
@@ -43,21 +53,22 @@
             fill-opacity: 0.9;
             stroke-width: 2px;
         }
-        #fixed-tooltip {
+        .tooltip {
             position: fixed;
-            z-index: 100000;
             background: white;
             padding: 12px;
             border: 1px solid #ccc;
             border-radius: 4px;
             pointer-events: none;
+            opacity: 0;
+            z-index: 100000;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             font-family: Arial, sans-serif;
             font-size: 14px;
             max-width: 300px;
             line-height: 1.4;
         }
-        #fixed-tooltip strong {
+        .tooltip strong {
             display: block;
             margin-bottom: 5px;
             color: #333;
@@ -72,105 +83,81 @@
     </style>
 </head>
 <body>
-    <h2>New York City Tree Health by Census Tract</h2>
+    <h2>New York City Tree Data by Census Tract</h2>
+    <div class="controls">
+        <select id="variableSelect">
+            <option value="health">Tree Health</option>
+            <option value="steward">Stewardship</option>
+            <option value="sidewalk">Sidewalk Condition</option>
+            <option value="wire_conflict">Wire Conflict</option>
+            <option value="tree_dbh">Tree Diameter</option>
+        </select>
+    </div>
     <div id="map"></div>
-    <div id="fixed-tooltip" style="display: none;"></div>
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
 
     <script>
-        document.addEventListener('mousemove', function(e) {
-            const target = e.target;
-            if (target.tagName === 'path' && target.classList.contains('neighborhood')) {
-                const tooltip = document.getElementById('fixed-tooltip');
-                if (!tooltip) return;
+        let currentOverlay = null;
+        let currentMap = null;
+        let NeighborhoodOverlay = null;  // Will be defined when Google Maps loads
 
-                const properties = JSON.parse(target.getAttribute('data-feature'));
-                
-                const content = `
-                    <strong>${properties.NTAName}</strong>
-                    <div>${properties.BoroName}</div>
-                    <div>Census Track: ${properties.CTLabel}</div>
-                    <div class="tooltip-health">
-                        <strong>Mean Tree Health:</strong> ${
-                            typeof properties.meanHealth === 'number' 
-                                ? properties.meanHealth.toFixed(2) 
-                                : properties.meanHealth
-                        }
-                    </div>
-                `;
-                
-                tooltip.innerHTML = content;
-                tooltip.style.display = 'block';
-
-                let left = e.clientX + 10;
-                let top = e.clientY + 10;
-
-                const tooltipRect = tooltip.getBoundingClientRect();
-
-                if (left + tooltipRect.width > window.innerWidth) {
-                    left = e.clientX - tooltipRect.width - 10;
-                }
-                if (top + tooltipRect.height > window.innerHeight) {
-                    top = e.clientY - tooltipRect.height - 10;
-                }
-
-                tooltip.style.left = `${left}px`;
-                tooltip.style.top = `${top}px`;
-            }
-        });
-
-        document.addEventListener('mouseout', function(e) {
-            if (e.target.tagName === 'path' && e.target.classList.contains('neighborhood')) {
-                const tooltip = document.getElementById('fixed-tooltip');
-                if (tooltip) {
-                    tooltip.style.display = 'none';
-                }
-            }
-        });
-  
         function loadGoogleMaps() {
             const script = document.createElement('script');
-            script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyChegNSgoVHs5jxVnXxnxBDYpXo3VjW3cQ&loading=async&callback=initMap`;
+            script.src = `https://maps.googleapis.com/maps/api/js?key=[YOUR GOOGLE MAPS KEY]&callback=initMap`;
             script.async = true;
             script.defer = true;
             document.head.appendChild(script);
         }
 
+        function updateMap() {
+            const selectedVariable = document.getElementById('variableSelect').value;
+
+            Promise.all([
+                d3.json("nyct2010.json"),
+                d3.csv("Trees_Quantified.csv")
+            ]).then(([data, csvData]) => {
+                csvData.forEach(d => {
+                    d['census tract'] = d['census tract'].trim();
+                    d[selectedVariable] = +d[selectedVariable];
+                });
+
+                const variableDataMap = d3.nest()
+                    .key(d => d['census tract'] + '_' + d['borough'])
+                    .rollup(leaves => {
+                        return d3.mean(leaves, d => d[selectedVariable]);
+                    })
+                    .object(csvData);
+
+                if (currentOverlay) {
+                    currentOverlay.setMap(null);
+                }
+
+                currentOverlay = new NeighborhoodOverlay(data, variableDataMap, selectedVariable);
+                currentOverlay.setMap(currentMap);
+
+                let timeout;
+                google.maps.event.addListener(currentMap, 'bounds_changed', () => {
+                    if (timeout) clearTimeout(timeout);
+                    timeout = setTimeout(() => {
+                        currentOverlay.draw();
+                    }, 50);
+                });
+            })
+            .catch(error => {
+                console.error("Error loading data:", error);
+            });
+        }
+        
         function initMap() {
-            let overlay;
-            const map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: 40.7128, lng: -74.006 },
-                zoom: 11,
-                styles: [{
-                    featureType: 'administrative.neighborhood',
-                    elementType: 'labels',
-                    stylers: [{ visibility: 'off' }]
-                }],
-                fullscreenControl: true,
-                mapTypeControl: true,
-                streetViewControl: true,
-                zoomControl: true
-            });
-
-            google.maps.event.addListener(map, 'fullscreenChanged', () => {
-                const mapDiv = document.getElementById('map');
-                if (document.fullscreenElement) {
-                    mapDiv.classList.add('fullscreen');
-                } else {
-                    mapDiv.classList.remove('fullscreen');
-                }
-                if (overlay) {
-                    overlay.draw();
-                }
-            });
-
-            class NeighborhoodOverlay extends google.maps.OverlayView {
-                constructor(data, healthData) {
+            // Define the NeighborhoodOverlay class after Google Maps is loaded
+            NeighborhoodOverlay = class extends google.maps.OverlayView {
+                constructor(data, variableData, selectedVariable) {
                     super();
                     this.data = data;
-                    this.healthData = healthData;
+                    this.variableData = variableData;
+                    this.selectedVariable = selectedVariable;
                     this.drawRequested = false;
                 }
 
@@ -183,6 +170,12 @@
                         .style("position", "absolute")
                         .style("pointer-events", "auto");
 
+                    if (!d3.select("body").select(".tooltip").size()) {
+                        this.tooltip = d3.select("body").append("div")
+                            .attr("class", "tooltip")
+                            .style("opacity", 0);
+                    }
+
                     this.features = topojson.feature(
                         this.data, 
                         this.data.objects.nyct2010reproj
@@ -192,16 +185,16 @@
                         const tract = feature.properties.CTLabel.trim();
                         const borough = feature.properties.BoroName.trim();
                         const key = tract + '_' + borough;
-                        feature.properties.meanHealth = this.healthData[key] || null;
+                        feature.properties.variableValue = this.variableData[key] || null;
                     });
 
-                    // Create color scale for health values
-                    const healthValues = this.features
-                        .map(f => f.properties.meanHealth)
+                    // Create color scale for values
+                    const values = this.features
+                        .map(f => f.properties.variableValue)
                         .filter(v => v !== null);
                     
                     this.colorScale = d3.scaleSequential(d3.interpolateRdYlGn)
-                        .domain([d3.min(healthValues), d3.max(healthValues)]);
+                        .domain([d3.min(values), d3.max(values)]);
 
                     this.draw();
                 }
@@ -210,7 +203,7 @@
                     const projection = this.getProjection();
                     if (!projection) return;
 
-                    const bounds = map.getBounds();
+                    const bounds = currentMap.getBounds();
                     const sw = bounds.getSouthWest();
                     const ne = bounds.getNorthEast();
                     const swPixel = projection.fromLatLngToDivPixel(sw);
@@ -247,16 +240,35 @@
                         .append("path")
                         .attr("class", "neighborhood");
 
+                    const that = this;
                     enter.merge(paths)
                         .attr("d", path)
                         .style("fill", d => {
-                            return d.properties.meanHealth !== null 
-                                ? this.colorScale(d.properties.meanHealth) 
-                                : "#ccc";  // Gray for areas with no data
+                            return d.properties.variableValue !== null 
+                                ? this.colorScale(d.properties.variableValue) 
+                                : "#ccc";
                         })
-                        .style("pointer-events", "all")
-                        .each(function(d) {
-                            d3.select(this).attr('data-feature', JSON.stringify(d.properties));
+                        .on("mousemove", function(d) {
+                            const [x, y] = d3.mouse(document.body);
+                            that.tooltip
+                                .style("opacity", 0.9)
+                                .html(`
+                                    <strong>${d.properties.NTAName}</strong>
+                                    <div>${d.properties.BoroName}</div>
+                                    <div>Census Track: ${d.properties.CTLabel}</div>
+                                    <div class="tooltip-health">
+                                        <strong>Mean ${that.selectedVariable}:</strong> ${
+                                            typeof d.properties.variableValue === 'number' 
+                                                ? d.properties.variableValue.toFixed(2) 
+                                                : 'No data'
+                                        }
+                                    </div>
+                                `)
+                                .style("left", (x + 10) + "px")
+                                .style("top", (y - 10) + "px");
+                        })
+                        .on("mouseout", function() {
+                            that.tooltip.style("opacity", 0);
                         });
                 }
 
@@ -264,44 +276,47 @@
                     if (this.layer) {
                         this.layer.remove();
                     }
+                    if (this.tooltip) {
+                        this.tooltip.remove();
+                    }
                 }
             }
 
-            Promise.all([
-                d3.json("nyct2010.json"),
-                d3.csv("Trees_Quantified.csv")
-            ]).then(([data, csvData]) => {
-                console.log("Data loaded successfully");
-                
-                csvData.forEach(d => {
-                    d['census tract'] = d['census tract'].trim();
-                    d.health = +d.health;
-                });
-
-                const healthDataMap = d3.nest()
-                    .key(d => d['census tract'] + '_' + d['borough'])
-                    .rollup(leaves => {
-                        return d3.mean(leaves, d => d.health);
-                    })
-                    .object(csvData);
-
-                overlay = new NeighborhoodOverlay(data, healthDataMap);
-                overlay.setMap(map);
-
-                let timeout;
-                google.maps.event.addListener(map, 'bounds_changed', () => {
-                    if (timeout) clearTimeout(timeout);
-                    timeout = setTimeout(() => {
-                        overlay.draw();
-                    }, 50);
-                });
-            })
-            .catch(error => {
-                console.error("Error loading data:", error);
+            // Initialize the map
+            currentMap = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 40.7128, lng: -74.006 },
+                zoom: 11,
+                styles: [{
+                    featureType: 'administrative.neighborhood',
+                    elementType: 'labels',
+                    stylers: [{ visibility: 'off' }]
+                }],
+                fullscreenControl: true,
+                mapTypeControl: true,
+                streetViewControl: true,
+                zoomControl: true
             });
+
+            google.maps.event.addListener(currentMap, 'fullscreenChanged', () => {
+                const mapDiv = document.getElementById('map');
+                if (document.fullscreenElement) {
+                    mapDiv.classList.add('fullscreen');
+                } else {
+                    mapDiv.classList.remove('fullscreen');
+                }
+                if (currentOverlay) {
+                    currentOverlay.draw();
+                }
+            });
+
+            // Add listener for variable selection
+            document.getElementById('variableSelect').addEventListener('change', updateMap);
+            
+            // Initial map update
+            updateMap();
         }
 
-        window.initMap = initMap;
+        // Start loading Google Maps
         loadGoogleMaps();
     </script>
 </body>
