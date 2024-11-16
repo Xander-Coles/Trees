@@ -1,12 +1,11 @@
-Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom poverty status is determined,Borough
-1,-,Bronx
-2,20,Bronx
+census tract,Poverty Percent,borough
+2,20.0,Bronx
 4,13.2,Bronx
 16,26.3,Bronx
 19,37.1,Bronx
 20,53.2,Bronx
 23,54.2,Bronx
-24,0,Bronx
+24,0.0,Bronx
 25,50.5,Bronx
 27.01,52.6,Bronx
 27.02,52.7,Bronx
@@ -30,7 +29,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 52,49.3,Bronx
 53,54.7,Bronx
 54,41.7,Bronx
-56,38,Bronx
+56,38.0,Bronx
 59.02,26.9,Bronx
 60,35.2,Bronx
 61,9.8,Bronx
@@ -40,7 +39,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 65,44.2,Bronx
 67,47.1,Bronx
 68,22.5,Bronx
-69,44,Bronx
+69,44.0,Bronx
 70,30.1,Bronx
 71,28.8,Bronx
 72,33.4,Bronx
@@ -49,7 +48,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 75,31.7,Bronx
 76,34.6,Bronx
 77,37.8,Bronx
-78,31,Bronx
+78,31.0,Bronx
 79,44.7,Bronx
 83,41.9,Bronx
 84,13.6,Bronx
@@ -75,7 +74,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 129.01,48.9,Bronx
 130,5.7,Bronx
 131,35.5,Bronx
-132,7,Bronx
+132,7.0,Bronx
 133,25.5,Bronx
 135,40.2,Bronx
 138,5.5,Bronx
@@ -83,26 +82,24 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 143,52.2,Bronx
 144,46.4,Bronx
 145,50.4,Bronx
-147.01,61,Bronx
+147.01,61.0,Bronx
 147.02,57.8,Bronx
 149,48.5,Bronx
 151,28.2,Bronx
-152,14,Bronx
+152,14.0,Bronx
 153,50.8,Bronx
 155,51.7,Bronx
 157,26.7,Bronx
 158,11.5,Bronx
-159,51,Bronx
+159,51.0,Bronx
 160,3.3,Bronx
 161,51.6,Bronx
 162,14.4,Bronx
-163,-,Bronx
 164,10.1,Bronx
 165,33.9,Bronx
 166,10.2,Bronx
 167,43.8,Bronx
 169,39.4,Bronx
-171,-,Bronx
 173,36.7,Bronx
 175,45.8,Bronx
 177.01,46.7,Bronx
@@ -122,11 +119,11 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 197,35.7,Bronx
 199,38.1,Bronx
 200,27.4,Bronx
-201,43,Bronx
+201,43.0,Bronx
 202,25.9,Bronx
 204,18.1,Bronx
 205.01,35.6,Bronx
-205.02,43,Bronx
+205.02,43.0,Bronx
 206.01,16.1,Bronx
 209,35.8,Bronx
 210.01,14.5,Bronx
@@ -167,7 +164,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 236,32.2,Bronx
 237.02,35.1,Bronx
 237.03,43.7,Bronx
-237.04,55,Bronx
+237.04,55.0,Bronx
 238,28.6,Bronx
 239,45.2,Bronx
 240,27.9,Bronx
@@ -179,7 +176,6 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 246,5.8,Bronx
 247,29.3,Bronx
 248,9.6,Bronx
-249,-,Bronx
 250,11.8,Bronx
 251,34.6,Bronx
 252,23.8,Bronx
@@ -187,12 +183,12 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 254,15.6,Bronx
 255,50.3,Bronx
 256,27.9,Bronx
-257,28,Bronx
-261,8,Bronx
+257,28.0,Bronx
+261,8.0,Bronx
 263,34.4,Bronx
 264,14.2,Bronx
 265,32.3,Bronx
-266.01,15,Bronx
+266.01,15.0,Bronx
 266.02,19.6,Bronx
 267.01,29.4,Bronx
 267.02,27.6,Bronx
@@ -221,8 +217,8 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 302,7.9,Bronx
 307.01,7.8,Bronx
 309,3.1,Bronx
-310,11,Bronx
-312,4,Bronx
+310,11.0,Bronx
+312,4.0,Bronx
 314,5.7,Bronx
 316,15.1,Bronx
 318,12.7,Bronx
@@ -261,12 +257,12 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 369.01,53.3,Bronx
 369.02,45.3,Bronx
 370,12.7,Bronx
-371,36,Bronx
-372,19,Bronx
+371,36.0,Bronx
+372,19.0,Bronx
 373,37.3,Bronx
 374,39.4,Bronx
 375.04,51.7,Bronx
-376,11,Bronx
+376,11.0,Bronx
 378,25.1,Bronx
 379,43.1,Bronx
 380,38.8,Bronx
@@ -274,11 +270,11 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 382,22.2,Bronx
 383.01,39.9,Bronx
 383.02,49.3,Bronx
-385,54,Bronx
+385,54.0,Bronx
 386,13.3,Bronx
 387,48.7,Bronx
 388,20.5,Bronx
-389,48,Bronx
+389,48.0,Bronx
 390,37.4,Bronx
 391,41.4,Bronx
 392,28.3,Bronx
@@ -286,8 +282,8 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 394,31.7,Bronx
 395,34.7,Bronx
 396,27.8,Bronx
-397,51,Bronx
-398,15,Bronx
+397,51.0,Bronx
+398,15.0,Bronx
 399.01,47.4,Bronx
 399.02,42.3,Bronx
 401,42.3,Bronx
@@ -300,7 +296,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 406,26.7,Bronx
 407.01,36.5,Bronx
 407.02,30.7,Bronx
-408,26,Bronx
+408,26.0,Bronx
 409,17.1,Bronx
 411,21.4,Bronx
 413,21.9,Bronx
@@ -321,10 +317,10 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 430,7.3,Bronx
 431,30.1,Bronx
 434,14.7,Bronx
-435,0,Bronx
+435,0.0,Bronx
 436,14.2,Bronx
 442,26.5,Bronx
-444,17,Bronx
+444,17.0,Bronx
 448,5.7,Bronx
 449.01,15.3,Bronx
 449.02,8.5,Bronx
@@ -336,19 +332,18 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 462.01,6.9,Bronx
 462.02,19.8,Bronx
 484,6.5,Bronx
-504,0,Bronx
-516,4,Bronx
+504,0.0,Bronx
+516,4.0,Bronx
 1,15.2,Brooklyn
 2,39.8,Brooklyn
 3.01,18.2,Brooklyn
-5.01,8,Brooklyn
+5.01,8.0,Brooklyn
 5.02,7.3,Brooklyn
 7,5.2,Brooklyn
 9,7.7,Brooklyn
 11,8.8,Brooklyn
-13,35,Brooklyn
+13,35.0,Brooklyn
 15,26.3,Brooklyn
-18,-,Brooklyn
 20,21.1,Brooklyn
 21,7.6,Brooklyn
 22,29.3,Brooklyn
@@ -356,8 +351,8 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 29.01,53.9,Brooklyn
 30,13.5,Brooklyn
 31,3.3,Brooklyn
-33,17,Brooklyn
-34,20,Brooklyn
+33,17.0,Brooklyn
+34,20.0,Brooklyn
 35,6.6,Brooklyn
 36,8.4,Brooklyn
 37,10.5,Brooklyn
@@ -369,7 +364,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 45,3.7,Brooklyn
 46,2.3,Brooklyn
 47,8.7,Brooklyn
-49,2,Brooklyn
+49,2.0,Brooklyn
 50,3.9,Brooklyn
 51,6.6,Brooklyn
 52.01,26.2,Brooklyn
@@ -384,8 +379,8 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 62,17.7,Brooklyn
 63,7.8,Brooklyn
 64,11.3,Brooklyn
-65,6,Brooklyn
-66,15,Brooklyn
+65,6.0,Brooklyn
+66,15.0,Brooklyn
 67,3.7,Brooklyn
 68,29.7,Brooklyn
 69,4.3,Brooklyn
@@ -395,13 +390,12 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 74,32.8,Brooklyn
 75,4.1,Brooklyn
 76,37.7,Brooklyn
-77,5,Brooklyn
+77,5.0,Brooklyn
 78,25.9,Brooklyn
 80,15.2,Brooklyn
 82,33.5,Brooklyn
 84,30.2,Brooklyn
 85,52.7,Brooklyn
-86,-,Brooklyn
 88,10.9,Brooklyn
 90,29.7,Brooklyn
 92,41.3,Brooklyn
@@ -413,16 +407,16 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 102,24.9,Brooklyn
 104,30.2,Brooklyn
 106,41.9,Brooklyn
-108,38,Brooklyn
+108,38.0,Brooklyn
 110,28.9,Brooklyn
 112,33.6,Brooklyn
-114,34,Brooklyn
+114,34.0,Brooklyn
 116,31.7,Brooklyn
 117,10.2,Brooklyn
 118,30.9,Brooklyn
 119,7.9,Brooklyn
 120,33.7,Brooklyn
-121,10,Brooklyn
+121,10.0,Brooklyn
 122,38.5,Brooklyn
 126,31.1,Brooklyn
 127,22.6,Brooklyn
@@ -432,7 +426,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 130,24.4,Brooklyn
 131,9.7,Brooklyn
 132,18.5,Brooklyn
-133,4,Brooklyn
+133,4.0,Brooklyn
 134,6.4,Brooklyn
 135,5.3,Brooklyn
 136,12.6,Brooklyn
@@ -451,13 +445,12 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 151,6.9,Brooklyn
 152,10.2,Brooklyn
 153,4.4,Brooklyn
-154,-,Brooklyn
 155,4.7,Brooklyn
 157,1.6,Brooklyn
 159,3.1,Brooklyn
 160,20.7,Brooklyn
 161,10.6,Brooklyn
-162,11,Brooklyn
+162,11.0,Brooklyn
 163,8.1,Brooklyn
 164,8.6,Brooklyn
 165,5.6,Brooklyn
@@ -465,16 +458,14 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 167,5.2,Brooklyn
 168,8.5,Brooklyn
 169,18.6,Brooklyn
-170,18,Brooklyn
+170,18.0,Brooklyn
 171,3.8,Brooklyn
 172,3.8,Brooklyn
 174,6.4,Brooklyn
-175,-,Brooklyn
 176,12.6,Brooklyn
-177,-,Brooklyn
 178,20.2,Brooklyn
 179,18.5,Brooklyn
-180,27,Brooklyn
+180,27.0,Brooklyn
 181,8.3,Brooklyn
 182,19.1,Brooklyn
 183,7.7,Brooklyn
@@ -484,7 +475,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 187,14.2,Brooklyn
 188,11.3,Brooklyn
 190,23.8,Brooklyn
-191,23,Brooklyn
+191,23.0,Brooklyn
 192,26.8,Brooklyn
 193,15.9,Brooklyn
 194,16.8,Brooklyn
@@ -492,7 +483,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 196,23.1,Brooklyn
 197,14.1,Brooklyn
 198,16.5,Brooklyn
-199,14,Brooklyn
+199,14.0,Brooklyn
 200,14.8,Brooklyn
 201,7.6,Brooklyn
 202,4.8,Brooklyn
@@ -500,7 +491,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 204,11.2,Brooklyn
 205,6.8,Brooklyn
 206,7.3,Brooklyn
-207,5,Brooklyn
+207,5.0,Brooklyn
 208,18.5,Brooklyn
 210,23.3,Brooklyn
 211,18.7,Brooklyn
@@ -511,19 +502,19 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 216,42.8,Brooklyn
 217,15.4,Brooklyn
 218,44.4,Brooklyn
-219,21,Brooklyn
+219,21.0,Brooklyn
 220,43.8,Brooklyn
 221,26.3,Brooklyn
-222,45,Brooklyn
+222,45.0,Brooklyn
 224,42.5,Brooklyn
 226,27.9,Brooklyn
 227,14.2,Brooklyn
 228,33.8,Brooklyn
 229,19.3,Brooklyn
-230,38,Brooklyn
-231,19,Brooklyn
+230,38.0,Brooklyn
+231,19.0,Brooklyn
 232,44.3,Brooklyn
-233,33,Brooklyn
+233,33.0,Brooklyn
 234,52.7,Brooklyn
 235,48.4,Brooklyn
 236,45.4,Brooklyn
@@ -537,9 +528,9 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 246,25.5,Brooklyn
 247,20.1,Brooklyn
 248,25.6,Brooklyn
-249,18,Brooklyn
+249,18.0,Brooklyn
 250,18.5,Brooklyn
-251,36,Brooklyn
+251,36.0,Brooklyn
 252,18.8,Brooklyn
 253,25.9,Brooklyn
 254,17.3,Brooklyn
@@ -562,23 +553,23 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 270,15.5,Brooklyn
 271,23.7,Brooklyn
 272,18.4,Brooklyn
-273,29,Brooklyn
+273,29.0,Brooklyn
 274,14.6,Brooklyn
 275,25.1,Brooklyn
 276,26.5,Brooklyn
 277,37.9,Brooklyn
 278,24.9,Brooklyn
-279,14,Brooklyn
+279,14.0,Brooklyn
 280,14.9,Brooklyn
 281,52.7,Brooklyn
 282,19.4,Brooklyn
-283,36,Brooklyn
+283,36.0,Brooklyn
 284,20.9,Brooklyn
 285.01,12.4,Brooklyn
-285.02,50,Brooklyn
+285.02,50.0,Brooklyn
 286,23.9,Brooklyn
 287,25.5,Brooklyn
-288,22,Brooklyn
+288,22.0,Brooklyn
 289,28.5,Brooklyn
 290,21.3,Brooklyn
 291,14.1,Brooklyn
@@ -590,7 +581,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 297,32.2,Brooklyn
 298,11.1,Brooklyn
 299,47.2,Brooklyn
-300,15,Brooklyn
+300,15.0,Brooklyn
 301,23.4,Brooklyn
 302,15.8,Brooklyn
 303,53.3,Brooklyn
@@ -608,7 +599,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 317.02,19.3,Brooklyn
 319,29.5,Brooklyn
 321,23.4,Brooklyn
-323,16,Brooklyn
+323,16.0,Brooklyn
 325,18.2,Brooklyn
 326,40.7,Brooklyn
 327,20.6,Brooklyn
@@ -618,10 +609,10 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 331,14.3,Brooklyn
 333,15.2,Brooklyn
 335,16.4,Brooklyn
-336,11,Brooklyn
+336,11.0,Brooklyn
 337,18.5,Brooklyn
 339,32.4,Brooklyn
-340,41,Brooklyn
+340,41.0,Brooklyn
 341,17.6,Brooklyn
 342,40.7,Brooklyn
 343,29.2,Brooklyn
@@ -662,7 +653,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 382,42.8,Brooklyn
 383,15.4,Brooklyn
 385,29.4,Brooklyn
-386,20,Brooklyn
+386,20.0,Brooklyn
 387,29.3,Brooklyn
 388,17.3,Brooklyn
 389,28.7,Brooklyn
@@ -683,12 +674,11 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 404,14.9,Brooklyn
 405,28.4,Brooklyn
 406,10.9,Brooklyn
-407,-,Brooklyn
 408,24.4,Brooklyn
 409,34.2,Brooklyn
 410,19.3,Brooklyn
 411,28.9,Brooklyn
-412,15,Brooklyn
+412,15.0,Brooklyn
 413,18.4,Brooklyn
 414.01,11.7,Brooklyn
 414.02,23.3,Brooklyn
@@ -701,7 +691,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 421,24.6,Brooklyn
 422,17.2,Brooklyn
 423,24.7,Brooklyn
-424,12,Brooklyn
+424,12.0,Brooklyn
 425,29.4,Brooklyn
 426,17.6,Brooklyn
 427,39.6,Brooklyn
@@ -721,19 +711,19 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 441,26.3,Brooklyn
 442,10.9,Brooklyn
 443,21.4,Brooklyn
-444,18,Brooklyn
+444,18.0,Brooklyn
 445,28.7,Brooklyn
 446,17.6,Brooklyn
 447,29.5,Brooklyn
 448,20.8,Brooklyn
 449,38.8,Brooklyn
 450,46.6,Brooklyn
-452,11,Brooklyn
-453,43,Brooklyn
+452,11.0,Brooklyn
+453,43.0,Brooklyn
 454,22.3,Brooklyn
 456,22.4,Brooklyn
-458,7,Brooklyn
-460,28,Brooklyn
+458,7.0,Brooklyn
+460,28.0,Brooklyn
 462.01,20.4,Brooklyn
 462.02,28.2,Brooklyn
 464,32.3,Brooklyn
@@ -764,7 +754,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 499,6.3,Brooklyn
 500,9.6,Brooklyn
 501,11.1,Brooklyn
-502.02,9,Brooklyn
+502.02,9.0,Brooklyn
 503,10.2,Brooklyn
 504,11.6,Brooklyn
 505,30.8,Brooklyn
@@ -773,7 +763,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 508.01,29.9,Brooklyn
 508.03,15.2,Brooklyn
 508.04,18.6,Brooklyn
-509,57,Brooklyn
+509,57.0,Brooklyn
 510.01,7.4,Brooklyn
 510.02,16.7,Brooklyn
 511,29.2,Brooklyn
@@ -813,7 +803,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 550,25.8,Brooklyn
 551,13.8,Brooklyn
 552,20.1,Brooklyn
-553,12,Brooklyn
+553,12.0,Brooklyn
 554,21.3,Brooklyn
 555,9.1,Brooklyn
 556,11.5,Brooklyn
@@ -823,7 +813,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 561,9.4,Brooklyn
 562,10.9,Brooklyn
 563,24.3,Brooklyn
-564,3,Brooklyn
+564,3.0,Brooklyn
 565,9.9,Brooklyn
 566,7.9,Brooklyn
 568,11.2,Brooklyn
@@ -831,7 +821,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 570,8.1,Brooklyn
 571,9.5,Brooklyn
 572,41.6,Brooklyn
-573,18,Brooklyn
+573,18.0,Brooklyn
 574,11.8,Brooklyn
 575,13.4,Brooklyn
 576,15.2,Brooklyn
@@ -839,12 +829,12 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 579,15.1,Brooklyn
 580,16.2,Brooklyn
 582,27.4,Brooklyn
-584,10,Brooklyn
+584,10.0,Brooklyn
 586,12.9,Brooklyn
 588,19.4,Brooklyn
 589,4.6,Brooklyn
 590,16.6,Brooklyn
-591,10,Brooklyn
+591,10.0,Brooklyn
 592,10.1,Brooklyn
 593,12.7,Brooklyn
 594.01,20.7,Brooklyn
@@ -858,9 +848,9 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 610.03,23.8,Brooklyn
 610.04,32.9,Brooklyn
 612,12.2,Brooklyn
-616,17,Brooklyn
-620,10,Brooklyn
-622,13,Brooklyn
+616,17.0,Brooklyn
+620,10.0,Brooklyn
+622,13.0,Brooklyn
 626,25.2,Brooklyn
 628,6.2,Brooklyn
 632,7.8,Brooklyn
@@ -868,23 +858,22 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 638,1.7,Brooklyn
 640,17.6,Brooklyn
 642,14.1,Brooklyn
-644,13,Brooklyn
+644,13.0,Brooklyn
 646,4.7,Brooklyn
 648,5.5,Brooklyn
-650,12,Brooklyn
+650,12.0,Brooklyn
 652,5.7,Brooklyn
 654,6.1,Brooklyn
 656,8.2,Brooklyn
 658,5.7,Brooklyn
 660,0.8,Brooklyn
 662,4.2,Brooklyn
-666,-,Brooklyn
 670,10.3,Brooklyn
 672,18.3,Brooklyn
 674,3.9,Brooklyn
 676,4.5,Brooklyn
 678,5.3,Brooklyn
-680,24,Brooklyn
+680,24.0,Brooklyn
 682,4.1,Brooklyn
 686,8.2,Brooklyn
 688,2.2,Brooklyn
@@ -895,8 +884,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 698,6.4,Brooklyn
 700,7.1,Brooklyn
 702.01,6.8,Brooklyn
-702.02,0,Brooklyn
-702.03,-,Brooklyn
+702.02,0.0,Brooklyn
 706,0.7,Brooklyn
 720,5.9,Brooklyn
 722,14.1,Brooklyn
@@ -917,7 +905,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 752,1.1,Brooklyn
 754,29.3,Brooklyn
 756,15.7,Brooklyn
-758,7,Brooklyn
+758,7.0,Brooklyn
 760,19.7,Brooklyn
 762,31.8,Brooklyn
 764,17.6,Brooklyn
@@ -930,9 +918,9 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 780,4.7,Brooklyn
 782,15.1,Brooklyn
 784,8.6,Brooklyn
-786,19,Brooklyn
+786,19.0,Brooklyn
 788,20.2,Brooklyn
-790,14,Brooklyn
+790,14.0,Brooklyn
 792,32.7,Brooklyn
 794,21.3,Brooklyn
 796.01,11.8,Brooklyn
@@ -947,13 +935,13 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 810,24.6,Brooklyn
 814,24.1,Brooklyn
 816,21.4,Brooklyn
-818,30,Brooklyn
+818,30.0,Brooklyn
 820,22.5,Brooklyn
-822,21,Brooklyn
+822,21.0,Brooklyn
 824,21.2,Brooklyn
-826,19,Brooklyn
-828,16,Brooklyn
-830,11,Brooklyn
+826,19.0,Brooklyn
+828,16.0,Brooklyn
+830,11.0,Brooklyn
 832,3.9,Brooklyn
 834,12.9,Brooklyn
 836,8.7,Brooklyn
@@ -962,7 +950,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 846,21.4,Brooklyn
 848,18.9,Brooklyn
 850,10.7,Brooklyn
-852,0,Brooklyn
+852,0.0,Brooklyn
 854,8.1,Brooklyn
 856,10.3,Brooklyn
 858,15.1,Brooklyn
@@ -1003,23 +991,22 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 934,10.8,Brooklyn
 936,6.5,Brooklyn
 938,25.1,Brooklyn
-944.01,14,Brooklyn
+944.01,14.0,Brooklyn
 944.02,33.6,Brooklyn
 946,11.7,Brooklyn
 950,11.5,Brooklyn
 954,11.6,Brooklyn
 956,15.4,Brooklyn
 958,13.9,Brooklyn
-960,-,Brooklyn
 962,20.3,Brooklyn
 964,22.3,Brooklyn
 966,10.8,Brooklyn
 968,14.7,Brooklyn
-970,13,Brooklyn
+970,13.0,Brooklyn
 974,19.1,Brooklyn
 982,42.6,Brooklyn
 984,19.1,Brooklyn
-986,8,Brooklyn
+986,8.0,Brooklyn
 988,16.4,Brooklyn
 990,15.1,Brooklyn
 992,20.6,Brooklyn
@@ -1028,7 +1015,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 998,10.3,Brooklyn
 1004,8.2,Brooklyn
 1006,13.9,Brooklyn
-1008,24,Brooklyn
+1008,24.0,Brooklyn
 1010,11.6,Brooklyn
 1012,8.2,Brooklyn
 1014,13.4,Brooklyn
@@ -1045,7 +1032,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 1070,3.6,Brooklyn
 1078,8.6,Brooklyn
 1098,24.3,Brooklyn
-1104,22,Brooklyn
+1104,22.0,Brooklyn
 1106,38.5,Brooklyn
 1110,46.1,Brooklyn
 1116,37.8,Brooklyn
@@ -1074,14 +1061,13 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 1170,23.6,Brooklyn
 1172.01,24.8,Brooklyn
 1172.02,11.3,Brooklyn
-1174,24,Brooklyn
+1174,24.0,Brooklyn
 1176.01,26.2,Brooklyn
 1176.02,29.1,Brooklyn
 1178,24.8,Brooklyn
-1180,-,Brooklyn
 1182.01,19.9,Brooklyn
 1182.02,27.5,Brooklyn
-1184,25,Brooklyn
+1184,25.0,Brooklyn
 1186,35.5,Brooklyn
 1188,32.2,Brooklyn
 1190,44.7,Brooklyn
@@ -1090,7 +1076,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 1196,24.1,Brooklyn
 1198,38.8,Brooklyn
 1200,36.7,Brooklyn
-1202,27,Brooklyn
+1202,27.0,Brooklyn
 1208,26.9,Brooklyn
 1210,51.1,Brooklyn
 1214,48.2,Brooklyn
@@ -1098,25 +1084,22 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 1237,58.9,Brooklyn
 1502,6.3,Brooklyn
 1522,19.8,Brooklyn
-9901,-,Brooklyn
-1,-,Manhattan
 2.01,48.6,Manhattan
 2.02,24.6,Manhattan
-5,-,Manhattan
 6,44.7,Manhattan
 7,10.6,Manhattan
 8,28.9,Manhattan
-9,6,Manhattan
+9,6.0,Manhattan
 10.01,5.8,Manhattan
 10.02,38.9,Manhattan
 12,17.6,Manhattan
 13,7.4,Manhattan
 14.01,5.7,Manhattan
-14.02,31,Manhattan
+14.02,31.0,Manhattan
 15.01,10.3,Manhattan
 15.02,8.3,Manhattan
 16,34.6,Manhattan
-18,26,Manhattan
+18,26.0,Manhattan
 20,48.1,Manhattan
 21,2.9,Manhattan
 22.01,27.7,Manhattan
@@ -1128,7 +1111,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 27,11.8,Manhattan
 28,34.7,Manhattan
 29,20.6,Manhattan
-30.01,16,Manhattan
+30.01,16.0,Manhattan
 30.02,18.7,Manhattan
 31,13.1,Manhattan
 32,10.9,Manhattan
@@ -1139,16 +1122,16 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 37,4.9,Manhattan
 38,13.9,Manhattan
 39,6.2,Manhattan
-40,13,Manhattan
+40,13.0,Manhattan
 41,18.5,Manhattan
 42,11.5,Manhattan
-43,18,Manhattan
+43,18.0,Manhattan
 44,13.1,Manhattan
 45,3.8,Manhattan
 47,11.2,Manhattan
 48,9.3,Manhattan
 49,4.7,Manhattan
-50,8,Manhattan
+50,8.0,Manhattan
 52,11.9,Manhattan
 54,4.7,Manhattan
 55.01,4.8,Manhattan
@@ -1157,10 +1140,10 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 57,4.5,Manhattan
 58,4.7,Manhattan
 59,3.9,Manhattan
-60,11,Manhattan
-61,5,Manhattan
+60,11.0,Manhattan
+61,5.0,Manhattan
 62,36.9,Manhattan
-63,4,Manhattan
+63,4.0,Manhattan
 64,8.6,Manhattan
 65,12.3,Manhattan
 66,14.7,Manhattan
@@ -1170,7 +1153,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 70,9.9,Manhattan
 71,8.2,Manhattan
 72,9.2,Manhattan
-73,7,Manhattan
+73,7.0,Manhattan
 74,12.2,Manhattan
 75,4.5,Manhattan
 76,18.6,Manhattan
@@ -1183,7 +1166,6 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 83,18.5,Manhattan
 84,15.4,Manhattan
 86.01,5.6,Manhattan
-86.02,-,Manhattan
 86.03,5.1,Manhattan
 87,4.6,Manhattan
 88,7.6,Manhattan
@@ -1192,7 +1174,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 91,13.2,Manhattan
 92,5.4,Manhattan
 93,24.6,Manhattan
-94,0,Manhattan
+94,0.0,Manhattan
 95,13.7,Manhattan
 96,8.1,Manhattan
 97,16.9,Manhattan
@@ -1212,9 +1194,9 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 112.01,7.4,Manhattan
 112.02,4.5,Manhattan
 112.03,10.9,Manhattan
-113,19,Manhattan
+113,19.0,Manhattan
 114.01,3.2,Manhattan
-114.02,4,Manhattan
+114.02,4.0,Manhattan
 115,18.8,Manhattan
 116,5.4,Manhattan
 117,12.4,Manhattan
@@ -1230,8 +1212,8 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 128,4.5,Manhattan
 129,12.5,Manhattan
 130,7.1,Manhattan
-131,20,Manhattan
-132,7,Manhattan
+131,20.0,Manhattan
+132,7.0,Manhattan
 133,14.5,Manhattan
 134,14.3,Manhattan
 135,18.6,Manhattan
@@ -1241,13 +1223,13 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 139,7.3,Manhattan
 140,6.9,Manhattan
 142,5.9,Manhattan
-143,100,Manhattan
+143,100.0,Manhattan
 144.01,4.1,Manhattan
 144.02,5.4,Manhattan
 145,4.4,Manhattan
 146.01,3.8,Manhattan
 146.02,4.4,Manhattan
-147,3,Manhattan
+147,3.0,Manhattan
 148.01,4.4,Manhattan
 148.02,5.1,Manhattan
 149,5.1,Manhattan
@@ -1255,7 +1237,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 150.02,3.5,Manhattan
 151,21.9,Manhattan
 152,13.1,Manhattan
-153,4,Manhattan
+153,4.0,Manhattan
 154,9.2,Manhattan
 155,5.8,Manhattan
 156.01,9.7,Manhattan
@@ -1264,15 +1246,15 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 158.01,4.8,Manhattan
 158.02,5.7,Manhattan
 159,10.9,Manhattan
-160.01,2,Manhattan
-160.02,11,Manhattan
+160.01,2.0,Manhattan
+160.02,11.0,Manhattan
 161,2.8,Manhattan
 162,40.1,Manhattan
 163,8.6,Manhattan
 164,24.1,Manhattan
 165,6.2,Manhattan
 166,24.5,Manhattan
-167,8,Manhattan
+167,8.0,Manhattan
 168,37.5,Manhattan
 169,7.5,Manhattan
 170,30.1,Manhattan
@@ -1287,14 +1269,14 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 179,10.8,Manhattan
 180,25.7,Manhattan
 181,7.4,Manhattan
-182,43,Manhattan
+182,43.0,Manhattan
 183,6.4,Manhattan
 184,33.2,Manhattan
 185,7.2,Manhattan
 186,44.4,Manhattan
-187,12,Manhattan
+187,12.0,Manhattan
 188,29.7,Manhattan
-189,36,Manhattan
+189,36.0,Manhattan
 190,17.7,Manhattan
 191,10.2,Manhattan
 192,56.6,Manhattan
@@ -1322,9 +1304,9 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 214,25.6,Manhattan
 215,28.3,Manhattan
 216,23.6,Manhattan
-217.03,0,Manhattan
-218,39,Manhattan
-219,43,Manhattan
+217.03,0.0,Manhattan
+218,39.0,Manhattan
+219,43.0,Manhattan
 220,22.5,Manhattan
 221.02,14.5,Manhattan
 222,42.8,Manhattan
@@ -1339,7 +1321,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 230,27.7,Manhattan
 231,22.1,Manhattan
 232,30.2,Manhattan
-233,26,Manhattan
+233,26.0,Manhattan
 234,31.7,Manhattan
 235.01,41.3,Manhattan
 235.02,22.2,Manhattan
@@ -1360,14 +1342,14 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 253,27.9,Manhattan
 255,28.8,Manhattan
 257,10.9,Manhattan
-259,25,Manhattan
+259,25.0,Manhattan
 261,34.2,Manhattan
 263,29.1,Manhattan
 265,16.5,Manhattan
 267,18.5,Manhattan
 269,22.3,Manhattan
 271,27.6,Manhattan
-273,17,Manhattan
+273,17.0,Manhattan
 275,7.7,Manhattan
 277,38.6,Manhattan
 279,14.9,Manhattan
@@ -1378,15 +1360,12 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 291,28.9,Manhattan
 293,31.3,Manhattan
 295,14.7,Manhattan
-297,-,Manhattan
 299,37.6,Manhattan
 303,32.6,Manhattan
 307,5.3,Manhattan
 309,30.4,Manhattan
-311,-,Manhattan
 317.03,4.3,Manhattan
 317.04,3.8,Manhattan
-319,-,Manhattan
 1,11.4,Queens
 2,14.2,Queens
 4,13.3,Queens
@@ -1411,31 +1390,30 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 33,22.9,Queens
 34,14.1,Queens
 36,11.7,Queens
-37,-,Queens
 38,22.1,Queens
 39,36.5,Queens
 40.01,13.1,Queens
 40.02,24.7,Queens
-42,25,Queens
+42,25.0,Queens
 43,41.9,Queens
 44.01,23.2,Queens
 45,8.4,Queens
 47,25.9,Queens
-50,0,Queens
+50,0.0,Queens
 51,28.8,Queens
 52,15.1,Queens
 53,13.4,Queens
-54,23,Queens
-55,18,Queens
+54,23.0,Queens
+55,18.0,Queens
 57,21.8,Queens
 58,11.3,Queens
 59,12.3,Queens
-61,14,Queens
+61,14.0,Queens
 62.01,13.8,Queens
 62.02,13.1,Queens
 63,20.2,Queens
 65.01,12.3,Queens
-65.02,18,Queens
+65.02,18.0,Queens
 69,12.1,Queens
 71,16.7,Queens
 73,21.5,Queens
@@ -1447,14 +1425,13 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 85,18.1,Queens
 86,14.6,Queens
 87,39.2,Queens
-88,7,Queens
+88,7.0,Queens
 91,11.3,Queens
 94,16.6,Queens
 95,13.8,Queens
 96,10.6,Queens
 97,5.4,Queens
 98,21.9,Queens
-99,-,Queens
 100,19.8,Queens
 101,10.5,Queens
 102,10.3,Queens
@@ -1462,7 +1439,6 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 104,21.9,Queens
 105,22.8,Queens
 106,20.6,Queens
-107.01,-,Queens
 108,15.3,Queens
 110,19.6,Queens
 111,11.8,Queens
@@ -1483,12 +1459,12 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 126.01,18.5,Queens
 126.02,13.7,Queens
 128,15.2,Queens
-130,6,Queens
+130,6.0,Queens
 132,17.8,Queens
-134,12,Queens
-135,4,Queens
+134,12.0,Queens
+135,4.0,Queens
 136,8.8,Queens
-137,16,Queens
+137,16.0,Queens
 138,16.9,Queens
 140,7.4,Queens
 141,10.8,Queens
@@ -1498,7 +1474,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 144,17.8,Queens
 145,16.5,Queens
 147,5.1,Queens
-148,21,Queens
+148,21.0,Queens
 149,8.1,Queens
 150,12.3,Queens
 151,16.3,Queens
@@ -1510,39 +1486,38 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 157,24.6,Queens
 158.01,14.5,Queens
 158.02,9.8,Queens
-159,26,Queens
+159,26.0,Queens
 161,19.6,Queens
 163,26.4,Queens
 164,11.1,Queens
 166,9.2,Queens
 168,6.9,Queens
-169,8,Queens
+169,8.0,Queens
 170,15.4,Queens
-171,-,Queens
 172,7.4,Queens
 174,18.1,Queens
 176,10.2,Queens
 178,15.6,Queens
 179,11.7,Queens
 180,21.7,Queens
-181.01,17,Queens
+181.01,17.0,Queens
 181.02,15.4,Queens
 182,10.6,Queens
 183,17.2,Queens
 184.01,8.8,Queens
 184.02,24.1,Queens
-185.01,16,Queens
+185.01,16.0,Queens
 185.02,17.8,Queens
-186,19,Queens
+186,19.0,Queens
 187,6.8,Queens
 188,10.2,Queens
-189,15,Queens
+189,15.0,Queens
 190,8.9,Queens
 192,3.9,Queens
-194,8,Queens
+194,8.0,Queens
 196,14.7,Queens
 198,34.1,Queens
-199,16,Queens
+199,16.0,Queens
 202,17.5,Queens
 204,25.8,Queens
 205,17.8,Queens
@@ -1551,11 +1526,10 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 212,22.7,Queens
 214,28.7,Queens
 216,11.1,Queens
-219,0,Queens
+219,0.0,Queens
 220.01,9.2,Queens
 220.02,14.1,Queens
-229,-,Queens
-230,8,Queens
+230,8.0,Queens
 232,16.1,Queens
 235,24.5,Queens
 236,15.9,Queens
@@ -1563,14 +1537,13 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 240,24.8,Queens
 243,9.5,Queens
 245,8.1,Queens
-246,-,Queens
 247,8.7,Queens
 249,14.3,Queens
 251,9.2,Queens
 253.01,13.1,Queens
 253.02,18.8,Queens
 254,26.4,Queens
-255,11,Queens
+255,11.0,Queens
 257,9.1,Queens
 258,12.7,Queens
 259,13.3,Queens
@@ -1579,24 +1552,24 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 262,20.4,Queens
 263,22.3,Queens
 264,16.1,Queens
-265,17,Queens
+265,17.0,Queens
 266,24.9,Queens
 267,18.3,Queens
 269.01,18.5,Queens
 269.02,22.1,Queens
 270,29.3,Queens
-271,20,Queens
+271,20.0,Queens
 272,13.1,Queens
 273,25.6,Queens
 274,5.4,Queens
 275,21.8,Queens
 276,9.4,Queens
-277,18,Queens
+277,18.0,Queens
 278,24.7,Queens
 279,14.5,Queens
 280,2.2,Queens
 281,9.6,Queens
-282,7,Queens
+282,7.0,Queens
 283,17.4,Queens
 284,23.1,Queens
 285,18.8,Queens
@@ -1608,8 +1581,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 294,8.9,Queens
 295,8.6,Queens
 297,21.4,Queens
-299,-,Queens
-306,11,Queens
+306,11.0,Queens
 309.02,25.8,Queens
 309.03,16.5,Queens
 309.04,14.3,Queens
@@ -1619,10 +1591,9 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 328,8.4,Queens
 329,16.1,Queens
 330,14.6,Queens
-331,-,Queens
 334.01,10.8,Queens
-334.02,10,Queens
-337,16,Queens
+334.02,10.0,Queens
+337,16.0,Queens
 339,6.7,Queens
 347,12.6,Queens
 351,15.9,Queens
@@ -1633,7 +1604,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 361,21.7,Queens
 363,21.3,Queens
 365,23.3,Queens
-366,11,Queens
+366,11.0,Queens
 367,13.6,Queens
 368,7.2,Queens
 371,27.9,Queens
@@ -1643,8 +1614,6 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 377,26.4,Queens
 379,22.6,Queens
 381,27.2,Queens
-383.01,-,Queens
-383.02,-,Queens
 384,9.4,Queens
 394,10.1,Queens
 398,4.3,Queens
@@ -1666,15 +1635,15 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 427,27.9,Queens
 432,2.4,Queens
 434,3.5,Queens
-437.01,25,Queens
-437.02,21,Queens
+437.01,25.0,Queens
+437.02,21.0,Queens
 439,34.4,Queens
 440,19.6,Queens
 443.01,55.2,Queens
-443.02,17,Queens
+443.02,17.0,Queens
 444,25.7,Queens
 446.01,19.6,Queens
-446.02,39,Queens
+446.02,39.0,Queens
 448,21.8,Queens
 450,9.1,Queens
 452,24.8,Queens
@@ -1697,21 +1666,21 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 470,10.9,Queens
 471,20.9,Queens
 472,13.1,Queens
-473,17,Queens
+473,17.0,Queens
 475,19.4,Queens
 476,5.1,Queens
 478,7.4,Queens
 479,17.4,Queens
-480,10,Queens
+480,10.0,Queens
 481,16.2,Queens
 482,7.8,Queens
 483,20.1,Queens
 484,8.4,Queens
 485,11.3,Queens
-489,8,Queens
+489,8.0,Queens
 492,6.8,Queens
-493.01,7,Queens
-493.02,12,Queens
+493.01,7.0,Queens
+493.02,12.0,Queens
 495,11.6,Queens
 496,10.3,Queens
 497,11.3,Queens
@@ -1721,8 +1690,8 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 502.02,6.9,Queens
 504,8.6,Queens
 505,12.9,Queens
-506,4,Queens
-507,12,Queens
+506,4.0,Queens
+507,12.0,Queens
 508,10.9,Queens
 510,4.5,Queens
 511,4.1,Queens
@@ -1731,7 +1700,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 515,10.2,Queens
 516,9.3,Queens
 517,14.6,Queens
-518,7,Queens
+518,7.0,Queens
 520,3.6,Queens
 521,15.9,Queens
 522,6.9,Queens
@@ -1742,9 +1711,9 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 530,7.8,Queens
 531,16.7,Queens
 532,4.9,Queens
-534.01,2,Queens
+534.01,2.0,Queens
 535,17.8,Queens
-536.01,6,Queens
+536.01,6.0,Queens
 538,6.6,Queens
 539,21.2,Queens
 540,19.3,Queens
@@ -1762,11 +1731,11 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 557,20.6,Queens
 558,5.1,Queens
 559,26.6,Queens
-560,16,Queens
-561,0,Queens
+560,16.0,Queens
+561,0.0,Queens
 562,12.3,Queens
 564,5.1,Queens
-565,22,Queens
+565,22.0,Queens
 566,8.2,Queens
 567,6.9,Queens
 568,7.3,Queens
@@ -1777,12 +1746,12 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 582,17.4,Queens
 583,9.3,Queens
 585,14.9,Queens
-587,13,Queens
+587,13.0,Queens
 589,26.8,Queens
 590,14.1,Queens
 591,12.9,Queens
-592,3,Queens
-593,12,Queens
+592,3.0,Queens
+593,12.0,Queens
 594,3.5,Queens
 595,17.2,Queens
 596,1.7,Queens
@@ -1792,13 +1761,13 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 601,13.3,Queens
 603,6.3,Queens
 606,1.7,Queens
-607.01,0,Queens
+607.01,0.0,Queens
 608,5.8,Queens
 610,0.8,Queens
 612,6.8,Queens
 613.01,20.5,Queens
-613.02,0,Queens
-614,2,Queens
+613.02,0.0,Queens
+614,2.0,Queens
 616.01,3.7,Queens
 616.02,6.2,Queens
 618,3.6,Queens
@@ -1807,7 +1776,6 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 621,18.5,Queens
 622,4.7,Queens
 623,15.2,Queens
-624,-,Queens
 625,5.1,Queens
 626,7.1,Queens
 627,5.4,Queens
@@ -1821,22 +1789,21 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 638,12.6,Queens
 639,7.7,Queens
 641.01,11.8,Queens
-641.02,0,Queens
+641.02,0.0,Queens
 645,8.5,Queens
 646,8.8,Queens
 650,3.7,Queens
 654,5.7,Queens
-655.01,-,Queens
 656,10.7,Queens
 657.02,6.5,Queens
 657.03,4.5,Queens
 659,7.3,Queens
 660,5.4,Queens
 661,6.2,Queens
-663,5,Queens
+663,5.0,Queens
 664,8.5,Queens
 665.01,7.1,Queens
-667.01,8,Queens
+667.01,8.0,Queens
 669,4.2,Queens
 671,5.6,Queens
 677,2.6,Queens
@@ -1854,12 +1821,11 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 703,4.4,Queens
 707,8.2,Queens
 709,5.4,Queens
-711,16,Queens
+711,16.0,Queens
 713.03,6.1,Queens
 713.04,21.8,Queens
 713.05,9.5,Queens
-713.06,18,Queens
-716,-,Queens
+713.06,18.0,Queens
 717.01,12.9,Queens
 717.02,15.2,Queens
 719,15.5,Queens
@@ -1872,8 +1838,8 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 741,6.5,Queens
 743,7.5,Queens
 745,16.3,Queens
-747,9,Queens
-749,2,Queens
+747,9.0,Queens
+749,2.0,Queens
 757.01,5.7,Queens
 757.02,10.8,Queens
 769.01,3.4,Queens
@@ -1890,16 +1856,15 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 788,14.5,Queens
 790,21.5,Queens
 792,16.7,Queens
-793,-,Queens
 797.01,17.6,Queens
 797.02,23.9,Queens
 799,21.4,Queens
-803.01,12,Queens
+803.01,12.0,Queens
 803.02,4.3,Queens
 809,6.2,Queens
 814,17.7,Queens
 818,25.6,Queens
-837,16,Queens
+837,16.0,Queens
 838,11.3,Queens
 840,8.5,Queens
 845,22.3,Queens
@@ -1921,8 +1886,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 892,2.9,Queens
 907,13.1,Queens
 916.01,3.5,Queens
-916.02,-,Queens
-918,0,Queens
+918,0.0,Queens
 919,18.2,Queens
 922,1.9,Queens
 925,20.1,Queens
@@ -1943,31 +1907,29 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 972.03,45.5,Queens
 972.04,22.8,Queens
 973,1.6,Queens
-981,10,Queens
+981,10.0,Queens
 987,2.1,Queens
-991,4,Queens
-992,22,Queens
+991,4.0,Queens
+992,22.0,Queens
 997.01,6.3,Queens
-997.03,3,Queens
+997.03,3.0,Queens
 997.04,9.8,Queens
 997.05,5.2,Queens
 998.01,14.7,Queens
 998.02,21.4,Queens
-999,-,Queens
 1008.01,21.5,Queens
 1008.02,16.1,Queens
-1010.01,30,Queens
+1010.01,30.0,Queens
 1010.02,22.3,Queens
 1017,5.8,Queens
-1029,6,Queens
+1029,6.0,Queens
 1032.01,30.9,Queens
 1032.02,15.9,Queens
 1033,9.8,Queens
 1039,4.2,Queens
 1047,6.4,Queens
 1059,3.8,Queens
-1072.01,11,Queens
-1072.02,-,Queens
+1072.01,11.0,Queens
 1085,11.8,Queens
 1093,1.5,Queens
 1097,1.9,Queens
@@ -1986,34 +1948,33 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 1161,19.7,Queens
 1163,25.5,Queens
 1167,26.6,Queens
-1171,22,Queens
+1171,22.0,Queens
 1175,9.1,Queens
-1181,11,Queens
+1181,11.0,Queens
 1185,15.2,Queens
 1187,15.9,Queens
 1189,14.9,Queens
 1191,12.7,Queens
 1193,16.7,Queens
-1195,3,Queens
+1195,3.0,Queens
 1199,17.5,Queens
 1201,13.6,Queens
 1203,20.8,Queens
 1205,28.6,Queens
 1207,9.6,Queens
-1211,-,Queens
 1215,16.1,Queens
 1223,12.1,Queens
 1227.01,13.6,Queens
 1227.02,40.2,Queens
 1241,15.8,Queens
-1247,14,Queens
+1247,14.0,Queens
 1257,21.4,Queens
 1265,18.8,Queens
 1267,14.9,Queens
 1277,7.6,Queens
-1283,0,Queens
+1283,0.0,Queens
 1291.02,7.3,Queens
-1291.03,7,Queens
+1291.03,7.0,Queens
 1291.04,5.9,Queens
 1301,7.1,Queens
 1333,7.1,Queens
@@ -2055,15 +2016,14 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 1579.03,5.4,Queens
 1617,2.9,Queens
 1621,11.9,Queens
-9901,-,Queens
 3,18.4,Staten Island
-6,18,Staten Island
+6,18.0,Staten Island
 7,35.4,Staten Island
 8,11.3,Staten Island
 9,17.8,Staten Island
 11,23.2,Staten Island
 17,25.4,Staten Island
-18,0,Staten Island
+18,0.0,Staten Island
 20.01,4.7,Staten Island
 20.02,13.2,Staten Island
 21,25.1,Staten Island
@@ -2077,7 +2037,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 50,6.3,Staten Island
 59,10.2,Staten Island
 64,17.8,Staten Island
-67,10,Staten Island
+67,10.0,Staten Island
 70,17.8,Staten Island
 74,14.6,Staten Island
 75,26.1,Staten Island
@@ -2112,7 +2072,6 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 146.08,5.1,Staten Island
 147,6.6,Staten Island
 151,5.5,Staten Island
-154,-,Staten Island
 156.01,5.7,Staten Island
 156.02,2.4,Staten Island
 156.03,8.9,Staten Island
@@ -2121,20 +2080,20 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 170.07,7.6,Staten Island
 170.08,4.5,Staten Island
 170.09,8.5,Staten Island
-170.1,7.7,Staten Island
-170.11,7,Staten Island
-170.12,9,Staten Island
+170.10,7.7,Staten Island
+170.11,7.0,Staten Island
+170.12,9.0,Staten Island
 173,20.2,Staten Island
 176,3.7,Staten Island
 177,4.3,Staten Island
-181,14,Staten Island
-187.01,13,Staten Island
+181,14.0,Staten Island
+187.01,13.0,Staten Island
 187.02,4.4,Staten Island
 189.01,12.7,Staten Island
 189.02,11.2,Staten Island
 197,4.4,Staten Island
 198,5.3,Staten Island
-201,15,Staten Island
+201,15.0,Staten Island
 207,33.4,Staten Island
 208.01,19.6,Staten Island
 208.03,7.6,Staten Island
@@ -2142,7 +2101,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 213,27.8,Staten Island
 223,15.1,Staten Island
 226,2.8,Staten Island
-228,0,Staten Island
+228,0.0,Staten Island
 231,19.4,Staten Island
 239,22.7,Staten Island
 244.01,4.4,Staten Island
@@ -2161,8 +2120,7 @@ Geographic Area Name,Percent below poverty level!!Estimate!!Population for whom 
 291.03,5.5,Staten Island
 291.04,7.2,Staten Island
 303.01,8.7,Staten Island
-303.02,19,Staten Island
+303.02,19.0,Staten Island
 319.01,39.3,Staten Island
 319.02,41.2,Staten Island
 323,20.5,Staten Island
-9901,-,Staten Island
