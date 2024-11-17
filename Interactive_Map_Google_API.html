@@ -14,7 +14,7 @@
         }
         #map {
             height: 600px;
-            width: 800px;
+            width: 1200px;
             position: relative;
         }
         #map.fullscreen {
@@ -30,6 +30,8 @@
         .controls {
             margin-bottom: 10px;
             font-family: Arial, sans-serif;
+            display: flex;
+            gap: 10px;
         }
         .controls select {
             padding: 8px;
@@ -52,6 +54,10 @@
         .neighborhood:hover {
             fill-opacity: 0.9;
             stroke-width: 2px;
+        }
+        .neighborhood.filtered {
+            fill: #ccc !important;
+            fill-opacity: 0.3;
         }
         .tooltip {
             position: fixed;
@@ -80,6 +86,66 @@
             border-top: 1px solid #eee;
             color: #666;
         }
+        .legend {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
+            pointer-events: none;
+        }
+        .legend-title {
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .legend-gradient {
+            width: 200px;
+            height: 20px;
+            margin-bottom: 5px;
+        }
+        .legend-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #666;
+        }
+        .histogram-container {
+            position: absolute;
+            top: 60px;
+            left: 30px;
+            background: white;
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
+            width: 300px;
+        }
+        .histogram-title {
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .histogram-bar {
+            fill: steelblue;
+            opacity: 0.8;
+        }
+        .histogram-bar:hover {
+            opacity: 1;
+        }
+        .histogram-axis text {
+            font-size: 10px;
+        }
+        .no-data-message {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 20px;
+        }
     </style>
 </head>
 <body>
@@ -87,10 +153,17 @@
     <div class="controls">
         <select id="variableSelect">
             <option value="health">Tree Health</option>
-            <option value="steward">Stewardship</option>
-            <option value="sidewalk">Sidewalk Condition</option>
-            <option value="wire_conflict">Wire Conflict</option>
-            <option value="tree_dbh">Tree Diameter</option>
+            <option value="rf_predicted_health">Predicted Tree Health</option>
+            <option value="Poverty Percent">Actual Poverty Rate</option>
+            <option value="predicted_poverty">Tree Predicted Poverty Rate</option>
+        </select>
+        <select id="boroughSelect">
+            <option value="all">All Boroughs</option>
+            <option value="Queens">Queens</option>
+            <option value="Bronx">Bronx</option>
+            <option value="Brooklyn">Brooklyn</option>
+            <option value="Manhattan">Manhattan</option>
+            <option value="Staten Island">Staten Island</option>
         </select>
     </div>
     <div id="map"></div>
@@ -101,11 +174,100 @@
     <script>
         let currentOverlay = null;
         let currentMap = null;
-        let NeighborhoodOverlay = null;  // Will be defined when Google Maps loads
+        let NeighborhoodOverlay = null;
+        let histogramSvg = null;
+        let rawData = null;
+
+        function createHistogram(feature, selectedVariable) {
+            d3.select(".histogram-container").remove();
+
+            const container = d3.select("#map")
+                .append("div")
+                .attr("class", "histogram-container");
+
+            const tract = feature.properties.CTLabel.trim();
+            const borough = feature.properties.BoroName.trim();
+            
+            if (selectedVariable === "Poverty Percent") {
+                container.append("div")
+                    .attr("class", "no-data-message")
+                    .text("No distribution, this is already the smallest area surveyed by the Census Bureau");
+                return;
+            }
+            
+            const districtData = rawData.filter(d => 
+                d['census tract'].trim() === tract && 
+                d['borough'].trim() === borough
+            );
+
+            if (districtData.length === 0) {
+                container.append("div")
+                    .attr("class", "no-data-message")
+                    .text("No tree data available for this district");
+                return;
+            }
+
+            const title = `${feature.properties.NTAName} - ${selectedVariable.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}`;
+            
+            container.append("div")
+                .attr("class", "histogram-title")
+                .text(title);
+
+            const margin = {top: 20, right: 20, bottom: 30, left: 40};
+            const width = 260;
+            const height = 150;
+
+            histogramSvg = container.append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", `translate(${margin.left},${margin.top})`);
+
+            const values = districtData.map(d => +d[selectedVariable]).filter(v => !isNaN(v));
+
+            const x = d3.scaleLinear()
+                .domain([d3.min(values), d3.max(values)])
+                .range([0, width]);
+
+            const histogram = d3.histogram()
+                .domain(x.domain())
+                .thresholds(x.ticks(Math.min(20, values.length / 2)));
+
+            const bins = histogram(values);
+
+            const y = d3.scaleLinear()
+                .domain([0, d3.max(bins, d => d.length)])
+                .range([height, 0]);
+
+            histogramSvg.append("g")
+                .attr("class", "histogram-axis")
+                .attr("transform", `translate(0,${height})`)
+                .call(d3.axisBottom(x));
+
+            histogramSvg.append("g")
+                .attr("class", "histogram-axis")
+                .call(d3.axisLeft(y));
+
+            histogramSvg.selectAll("rect")
+                .data(bins)
+                .enter()
+                .append("rect")
+                .attr("class", "histogram-bar")
+                .attr("x", d => x(d.x0))
+                .attr("y", d => y(d.length))
+                .attr("width", d => Math.max(0, x(d.x1) - x(d.x0) - 1))
+                .attr("height", d => height - y(d.length));
+
+            container.append("div")
+                .style("text-align", "center")
+                .style("margin-top", "10px")
+                .style("font-size", "12px")
+                .text(`Total trees in district: ${values.length}`);
+        }
 
         function loadGoogleMaps() {
             const script = document.createElement('script');
-            script.src = `https://maps.googleapis.com/maps/api/js?key=[YOUR GOOGLE MAPS KEY]&callback=initMap`;
+            script.src = `https://maps.googleapis.com/maps/api/js?key=[Add Your Key]&callback=initMap`;
             script.async = true;
             script.defer = true;
             document.head.appendChild(script);
@@ -113,11 +275,16 @@
 
         function updateMap() {
             const selectedVariable = document.getElementById('variableSelect').value;
+            const selectedBorough = document.getElementById('boroughSelect').value;
+            const isHealthData = selectedVariable === 'health' || selectedVariable === 'rf_predicted_health';
+            const dataFile = isHealthData ? "DecisionTree_RandomForest_Health_Predictions.csv" : "Combined_Prediction.csv";
 
             Promise.all([
                 d3.json("nyct2010.json"),
-                d3.csv("Trees_Quantified.csv")
+                d3.csv(dataFile)
             ]).then(([data, csvData]) => {
+                rawData = csvData;
+                
                 csvData.forEach(d => {
                     d['census tract'] = d['census tract'].trim();
                     d[selectedVariable] = +d[selectedVariable];
@@ -134,7 +301,7 @@
                     currentOverlay.setMap(null);
                 }
 
-                currentOverlay = new NeighborhoodOverlay(data, variableDataMap, selectedVariable);
+                currentOverlay = new NeighborhoodOverlay(data, variableDataMap, selectedVariable, selectedBorough);
                 currentOverlay.setMap(currentMap);
 
                 let timeout;
@@ -151,14 +318,13 @@
         }
         
         function initMap() {
-            // Define the NeighborhoodOverlay class after Google Maps is loaded
             NeighborhoodOverlay = class extends google.maps.OverlayView {
-                constructor(data, variableData, selectedVariable) {
+                constructor(data, variableData, selectedVariable, selectedBorough) {
                     super();
                     this.data = data;
                     this.variableData = variableData;
                     this.selectedVariable = selectedVariable;
-                    this.drawRequested = false;
+                    this.selectedBorough = selectedBorough;
                 }
 
                 onAdd() {
@@ -188,15 +354,70 @@
                         feature.properties.variableValue = this.variableData[key] || null;
                     });
 
-                    // Create color scale for values
+                    // Filter values based on selected borough for the color scale
                     const values = this.features
+                        .filter(f => this.selectedBorough === 'all' || f.properties.BoroName === this.selectedBorough)
                         .map(f => f.properties.variableValue)
                         .filter(v => v !== null);
                     
                     this.colorScale = d3.scaleSequential(d3.interpolateRdYlGn)
                         .domain([d3.min(values), d3.max(values)]);
 
+                    this.updateLegend(values);
+
                     this.draw();
+                }
+
+                updateLegend(values) {
+                    d3.select(".legend").remove();
+
+                    const legend = d3.select("#map")
+                        .append("div")
+                        .attr("class", "legend");
+
+                    const titleText = this.selectedBorough === 'all' 
+                        ? this.selectedVariable.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+                        : `${this.selectedVariable.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())} (${this.selectedBorough})`;
+
+                    legend.append("div")
+                        .attr("class", "legend-title")
+                        .text(titleText);
+
+                    const gradientSvg = legend.append("svg")
+                        .attr("class", "legend-gradient")
+                        .attr("width", 200)
+                        .attr("height", 20);
+
+                    const gradient = gradientSvg.append("defs")
+                        .append("linearGradient")
+                        .attr("id", "legend-gradient")
+                        .attr("x1", "0%")
+                        .attr("y1", "0%")
+                        .attr("x2", "100%")
+                        .attr("y2", "0%");
+
+                    const numStops = 10;
+                    for (let i = 0; i < numStops; i++) {
+                        const offset = (i / (numStops - 1)) * 100;
+                        const value = d3.min(values) + (i / (numStops - 1)) * (d3.max(values) - d3.min(values));
+                        gradient.append("stop")
+                            .attr("offset", `${offset}%`)
+                            .attr("stop-color", this.colorScale(value));
+                    }
+
+                    gradientSvg.append("rect")
+                        .attr("width", 200)
+                        .attr("height", 20)
+                        .style("fill", "url(#legend-gradient)");
+
+                    const labels = legend.append("div")
+                        .attr("class", "legend-labels");
+                    
+                    labels.append("span")
+                        .text(d3.min(values).toFixed(2));
+                    
+                    labels.append("span")
+                        .text(d3.max(values).toFixed(2));
                 }
 
                 draw() {
@@ -228,7 +449,6 @@
                             };
                         })(projection, swPixel, nePixel)
                     };
-
                     const path = d3.geoPath().projection(d3.geoTransform(transform));
 
                     const paths = this.svg.selectAll("path")
@@ -243,13 +463,29 @@
                     const that = this;
                     enter.merge(paths)
                         .attr("d", path)
+                        .attr("class", d => {
+                            return "neighborhood" + 
+                                (this.selectedBorough !== 'all' && d.properties.BoroName !== this.selectedBorough 
+                                    ? " filtered" 
+                                    : "");
+                        })
                         .style("fill", d => {
+                            if (this.selectedBorough !== 'all' && d.properties.BoroName !== this.selectedBorough) {
+                                return "#ccc";
+                            }
                             return d.properties.variableValue !== null 
                                 ? this.colorScale(d.properties.variableValue) 
                                 : "#ccc";
                         })
                         .on("mousemove", function(d) {
+                            if (that.selectedBorough !== 'all' && d.properties.BoroName !== that.selectedBorough) {
+                                return;
+                            }
+                            
                             const [x, y] = d3.mouse(document.body);
+                            
+                            createHistogram(d, that.selectedVariable);
+                            
                             that.tooltip
                                 .style("opacity", 0.9)
                                 .html(`
@@ -269,6 +505,7 @@
                         })
                         .on("mouseout", function() {
                             that.tooltip.style("opacity", 0);
+                            d3.select(".histogram-container").remove();
                         });
                 }
 
@@ -279,10 +516,11 @@
                     if (this.tooltip) {
                         this.tooltip.remove();
                     }
+                    d3.select(".legend").remove();
+                    d3.select(".histogram-container").remove();
                 }
             }
 
-            // Initialize the map
             currentMap = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: 40.7128, lng: -74.006 },
                 zoom: 11,
@@ -309,14 +547,12 @@
                 }
             });
 
-            // Add listener for variable selection
             document.getElementById('variableSelect').addEventListener('change', updateMap);
+            document.getElementById('boroughSelect').addEventListener('change', updateMap);
             
-            // Initial map update
             updateMap();
         }
 
-        // Start loading Google Maps
         loadGoogleMaps();
     </script>
 </body>
