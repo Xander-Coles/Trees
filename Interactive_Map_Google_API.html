@@ -14,8 +14,9 @@
         }
         #map {
             height: 600px;
-            width: 1200px;
+            width: 800px;
             position: relative;
+            display: inline-block;
         }
         #map.fullscreen {
             position: fixed !important;
@@ -114,14 +115,13 @@
             color: #666;
         }
         .histogram-container {
-            position: absolute;
-            top: 60px;
-            left: 30px;
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 20px;
             background: white;
             padding: 15px;
             border-radius: 4px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            z-index: 1000;
             width: 300px;
         }
         .histogram-title {
@@ -146,6 +146,10 @@
             font-style: italic;
             padding: 20px;
         }
+        .visualization-container {
+            display: flex;
+            gap: 20px;
+        }
     </style>
 </head>
 <body>
@@ -166,7 +170,10 @@
             <option value="Staten Island">Staten Island</option>
         </select>
     </div>
-    <div id="map"></div>
+    <div class="visualization-container">
+        <div id="map"></div>
+        <div id="histogram-container" class="histogram-container"></div>
+    </div>
 
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
@@ -179,11 +186,8 @@
         let rawData = null;
 
         function createHistogram(feature, selectedVariable) {
-            d3.select(".histogram-container").remove();
-
-            const container = d3.select("#map")
-                .append("div")
-                .attr("class", "histogram-container");
+            const container = d3.select("#histogram-container")
+                .html("");  // Clear previous content
 
             const tract = feature.properties.CTLabel.trim();
             const borough = feature.properties.BoroName.trim();
@@ -203,7 +207,7 @@
             if (districtData.length === 0) {
                 container.append("div")
                     .attr("class", "no-data-message")
-                    .text("No tree data available for this district");
+                    .text("No tree data or no one lives here (no economic data) available available for this district");
                 return;
             }
 
@@ -224,9 +228,13 @@
                 .attr("transform", `translate(${margin.left},${margin.top})`);
 
             const values = districtData.map(d => +d[selectedVariable]).filter(v => !isNaN(v));
-
+            
+            // Ensure maximum value and minimum (0 and 1 for health) is included in domain
+            const maxDomain = selectedVariable.includes('health') ? 1.1 : d3.max(values);
+            const minDomain = selectedVariable.includes('health') ? 0 : d3.min(values);
+            
             const x = d3.scaleLinear()
-                .domain([d3.min(values), d3.max(values)])
+                .domain([minDomain, maxDomain])
                 .range([0, width]);
 
             const histogram = d3.histogram()
@@ -267,7 +275,7 @@
 
         function loadGoogleMaps() {
             const script = document.createElement('script');
-            script.src = `https://maps.googleapis.com/maps/api/js?key=[Add Your Key]&callback=initMap`;
+            script.src = `https://maps.googleapis.com/maps/api/js?key=[Your Key]&callback=initMap`;
             script.async = true;
             script.defer = true;
             document.head.appendChild(script);
@@ -505,7 +513,6 @@
                         })
                         .on("mouseout", function() {
                             that.tooltip.style("opacity", 0);
-                            d3.select(".histogram-container").remove();
                         });
                 }
 
@@ -517,7 +524,6 @@
                         this.tooltip.remove();
                     }
                     d3.select(".legend").remove();
-                    d3.select(".histogram-container").remove();
                 }
             }
 
