@@ -45,9 +45,9 @@
 3. The file will output a "DecisionTree_Neural_Health_Predictions.csv"
 
 "#Display the Clorepth Map"
-1.Setup an HTTP server to run your D3 visualizations as discussed in the D3 lecture.
+1. Setup an HTTP server to run your D3 visualizations as discussed in the D3 lecture.
 2. Open the http://localhost:8000/Interactive_Map_Google_API.html
-3. Feel free to explore and change the visualization variables and areas, use google maps api
+3. 3. Feel free to explore and change the visualization variables and areas, use google maps api
 
 "#Supporting Bar Graph Top 4 Tree Species"
 1. After having downloaded the NY Tree Data, run the file named "DataCleaningCountSpecies.py"
