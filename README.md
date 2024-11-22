@@ -21,29 +21,33 @@
     
 "#Run Data Cleaning on NYC Tree Data and NYC ACS Census Tract Data"
 1. After having downloaded the NYC Tree Data and NYC ACS Census Tract Data, navigate to the file named "Data_cleaning.ipynb"
-2. Run that file to output a "Trees_Quantified.csv" as well as a "Economic_census.csv"
+2. Remember to change pd.read_csv('2015_Street_Tree_Census_-_Tree_Data_20241027.csv') because that might not be the name of your file (the name depends on when you download the original tree data set file
+3. Run that file to output a "Trees_Quantified.csv" as well as a "Economic_census.csv"
 
 "#Run KNN_Poverty"
 1. Obtain both "Trees_Quantified.csv" as well as a "Economic_census.csv" in the steps listed above.
-2. Run the file named "KNN_Poverty.ipynb"
+2. Run the file named "KNN_Poverty.ipynb" only until where it says so. There is also test code for optimizing variables that you don't need to run
 3. The file will output a "Combined_Prediction.csv"
 
 "#Run Decision_Tree_Health.ipynb"
 1. Obtain the "Trees_Quantified.csv" file
-2. Run the file named "Decision_Tree_Health.ipynb"
+2. Run the file named "Decision_Tree_Health.ipynb" only until where it says so. There is also test code for optimizing variables that you don't need to run.
 3. The file will output a "DecisionTree_RandomForest_Health_Predictions.csv"
 
 "#Run Decision_Tree_Socioeconomic.ipynb"
 1. Obtain the "Demographic_New_York_withborough_census_trackt.csv" file and "DecisionTree_RandomForest_Health_Predictions.csv" file
-2. Run the file named "Decision_Tree_Socioeconomic.ipynb"
+2. Run the file named "Decision_Tree_Socioeconomic.ipynb" only until where it says so. There is also test code for optimizing variables that you don't need to run
 3. The file will output a "DecisionTree_Socioeconomic_Predictions.csv"
 
 "#Run Neural Network"
-1. Not sure if we're using this at all or if we need to put it
+1. Obtain the "Demographic_New_York_withborough_census_trackt.csv" file and "DecisionTree_RandomForest_Health_Predictions.csv" file
+2. Run the file named "Neural Network Health.ipynb" only until where it says so. There is also test code for optimizing variables that you don't need to run
+3. The file will output a "DecisionTree_Neural_Health_Predictions.csv"
 
 "#Display the Clorepth Map"
-1. Also not sure the steps for this and what csv's are needed to whoever can fill it in 
-
+1.Setup an HTTP server to run your D3 visualizations as discussed in the D3 lecture.
+2. Open the http://localhost:8000/Interactive_Map_Google_API.html
+3. Feel free to explore and change the visualization variables and areas, use google maps api
 
 "#Supporting Bar Graph Top 4 Tree Species"
 1. After having downloaded the NY Tree Data, run the file named "DataCleaningCountSpecies.py"
