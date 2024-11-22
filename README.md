@@ -10,14 +10,7 @@
 "#Build Demographic_New_York_withborough_census_trackt.csv"
 1. Open the NYC ACS Census Tract Data in Excel
 2. Delete the first row
-3. Add a new column to the right of the column "Geographic Area Name" with the first row value being "Borough"
-4. In the second row of the new "Borough" column, input this formula: "=IF(ISNUMBER(SEARCH("Bronx", B2)), "Bronx",
-   IF(ISNUMBER(SEARCH("Queen", B2)), "Queen",
-   IF(ISNUMBER(SEARCH("Kings", B2)), "Brooklyn",
-   IF(ISNUMBER(SEARCH("New York County", B2)), "Manhattan",
-   IF(ISNUMBER(SEARCH("Richmond", B2)), "Staten Island", "Other")))))"
-5. Autofill the formula for the rest of the rows, and fill out the column
-6. Save the file as "Demographic_New_York_withborough_census_trackt.csv"
+3. Save the file as "Demographic_New_York_withborough_census_trackt.csv"
     
 "#Run Data Cleaning on NYC Tree Data and NYC ACS Census Tract Data"
 1. After having downloaded the NYC Tree Data and NYC ACS Census Tract Data, navigate to the file named "Data_cleaning.ipynb"
