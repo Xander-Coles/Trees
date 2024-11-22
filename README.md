@@ -46,8 +46,10 @@
 
 "#Display the Clorepth Map"
 1. Setup an HTTP server to run your D3 visualizations as discussed in the D3 lecture.
-2. Open the http://localhost:8000/Interactive_Map_Google_API.html
-3. Feel free to explore and change the visualization variables and areas, use google maps api. You can also change the excel names to see predicted results from not the best methods (Decision Tree and Random Forest).
+2. Create API Key for Google Maps: https://developers.google.com/maps/documentation/javascript/get-api-key.
+3. Change the code where it "[ADD YOUR API KEY]".
+4. Open the http://localhost:8000/Interactive_Map_Google_API.html
+5. Feel free to explore and change the visualization variables and areas, use google maps api. You can also change the excel names to see predicted results from not the best methods (Decision Tree and Random Forest).
 
 "#Supporting Bar Graph Top 4 Tree Species"
 1. After having downloaded the NY Tree Data, run the file named "DataCleaningCountSpecies.py"
