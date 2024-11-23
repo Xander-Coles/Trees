@@ -44,7 +44,7 @@ Installation:
 2. Run the file named "Neural Network Health.ipynb" only until where it says so. There is also test code for optimizing variables that you don't need to run
 3. The file will output a "DecisionTree_Neural_Health_Predictions.csv"
 
-"#Display the Clorepth Map"
+"#Display the Cloropleth Map"
 1. Setup an HTTP server to run your D3 visualizations as discussed in the D3 lecture.
 2. Create API Key for Google Maps: https://developers.google.com/maps/documentation/javascript/get-api-key.
 3. Change the code where it "[ADD YOUR API KEY]".
@@ -56,3 +56,13 @@ Installation:
 2. This will output a csv file named "species_counts.csv"
 3. With this csv, run the file named "Top5_Tree_Species_Bar_Graph.html" to output the bar graph
 Note: All other supporting graphs are done in Tableau using the NYC Tree Data and American Community Survey Data
+
+Execution: The Cloropleth offers many interactive features that can be tried:
+. Selection of variable in toggle (tree health, predicted tree health, actual poverty percent, tree predicted poverty rate)
+. Selection of borough to be colored (All Boroughs, Queens, Bronx, Manhattan, Brooklyn or Staten Island) for better distribution for sub-municipality analysis.
+. tooltip showing mean of selected variable in census tract which has your mouse on it
+. histogram of distribution of variable in census tract which has your mouse on it (note that some census tract might have no trees surveyd or no one living there for census tract making no color and no distribution vaialable). For actual poverty rate this features will showcase just a text as each census tract has only one povert percent
+. Google Maps API - this includes the ability of showing map, setelite map of locations and possibility of using street view
+. Zoom tool. Zoom is performed when double clickin in map
+
+For extra background on formation of data look for the supporting Top5_Tree_Species_Bar_Graph.html and images from tableau
