@@ -1,5 +1,12 @@
 "#Trees" 
+See demo vide: https://youtu.be/Xv14g270618
 
+Description: This package includes ipynb, html, excels (CSV), python and pictures to analyze and showcase tree health and socieconomic analysis. This includes Demographic_New_York_withborough_census_trackt.csv showcasing the socieconomic data; data_cleaning.ipynb to clean data in tree data set (to be dowlaoded by user) and socieconomic data; KNN_Poverty.ipynb to generate predictions for nearest neighbor model for socieconomic data (poverty by census tract); Decision_Tree_Health.ipynb to perform decision tree and random forest to perform analysis on tree health prediction; Decision_Tree_Socioeconomic.ipynb  generate predictions for decision tree for socieconomic data (poverty by census tract); Neural Network.ipynb to use Neural Network to predict tree health in New York; Interactive_Map_Google_API.html to showcase visualization of prediction and distribution of tree health and poverty; DataCleaningCountSpecies.py to clean formating for tree species analysis and further beckground for the tasks; Top5_Tree_Species_Bar_Graph.html to showcase visualization of tree species distribution.
+
+Put precisely, there is a critical need for predictive modeling and geographical classification to address disparities in tree quality and distribution across New York City. Our goal is to estimate tree health outcomes using predictive models while leveraging socioeconomic and demographic data to identify and highlight inequities in tree maintenance and implementation. We feed those models into an interactive Choropleth Map, enabling users to explore the data by switching between models and fine-tuning hyperparameters, providing actionable insights for equitable intervention. This approach seeks to uncover and address the disproportionate adverse health impacts experienced by lower-income and minority communities due to insufficient urban greenery. By combining algorithmic insights with visual evidence, our solution aims to support targeted interventions and promote environmental equity in urban planning and tree maintenance efforts.
+
+
+Installation:
 "#Download NYC Tree Data"
 1. Navigate to this link: https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh/about_data
 2. Click Export in the upper right hand corner, and download as a csv
@@ -17,7 +24,7 @@
 2. Remember to change pd.read_csv('2015_Street_Tree_Census_-_Tree_Data_20241027.csv') because that might not be the name of your file (the name depends on when you download the original tree data set file
 3. Run that file to output a "Trees_Quantified.csv" as well as a "Economic_census.csv"
 
-"#Run KNN_Poverty"
+"#Run KNN_Poverty.ipynb"
 1. Obtain both "Trees_Quantified.csv" as well as a "Economic_census.csv" in the steps listed above.
 2. Run the file named "KNN_Poverty.ipynb" only until where it says so. There is also test code for optimizing variables that you don't need to run
 3. The file will output a "Combined_Prediction.csv"
@@ -32,7 +39,7 @@
 2. Run the file named "Decision_Tree_Socioeconomic.ipynb" only until where it says so. There is also test code for optimizing variables that you don't need to run
 3. The file will output a "DecisionTree_Socioeconomic_Predictions.csv"
 
-"#Run Neural Network"
+"#Run Neural Network.ipynb"
 1. Obtain the "Demographic_New_York_withborough_census_trackt.csv" file and "DecisionTree_RandomForest_Health_Predictions.csv" file
 2. Run the file named "Neural Network Health.ipynb" only until where it says so. There is also test code for optimizing variables that you don't need to run
 3. The file will output a "DecisionTree_Neural_Health_Predictions.csv"
