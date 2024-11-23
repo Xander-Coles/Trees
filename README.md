@@ -10,14 +10,6 @@ Installation:
 "#Download NYC Tree Data"
 1. Navigate to this link: https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh/about_data
 2. Click Export in the upper right hand corner, and download as a csv
-
-"#Download NYC ACS Census Tract Data"
-1. 
-
-"#Build Demographic_New_York_withborough_census_trackt.csv"
-1. Open the NYC ACS Census Tract Data in Excel
-2. Delete the first row
-3. Save the file as "Demographic_New_York_withborough_census_trackt.csv"
     
 "#Run Data Cleaning on NYC Tree Data and NYC ACS Census Tract Data"
 1. After having downloaded the NYC Tree Data and NYC ACS Census Tract Data, navigate to the file named "Data_cleaning.ipynb"
