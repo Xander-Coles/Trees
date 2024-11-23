@@ -207,7 +207,7 @@
             if (districtData.length === 0) {
                 container.append("div")
                     .attr("class", "no-data-message")
-                    .text("No tree data or no one lives here (no economic data) available available for this district");
+                    .text("No tree data or no one lives here (not economic data) available available for this district");
                 return;
             }
 
@@ -275,7 +275,7 @@
 
         function loadGoogleMaps() {
             const script = document.createElement('script');
-            script.src = `https://maps.googleapis.com/maps/api/js?key=[ADD YOUR KEY]&callback=initMap`;
+            script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAGPwSNaEdfsBJnOIzlo86dhpkKZam82DY&callback=initMap`;
             script.async = true;
             script.defer = true;
             document.head.appendChild(script);
@@ -285,7 +285,7 @@
             const selectedVariable = document.getElementById('variableSelect').value;
             const selectedBorough = document.getElementById('boroughSelect').value;
             const isHealthData = selectedVariable === 'health' || selectedVariable === 'rf_predicted_health';
-            const dataFile = isHealthData ? "DecisionTree_RandomForest_Health_Predictions.csv" : "Combined_Prediction.csv";
+            const dataFile = isHealthData ? "DecisionTree_RandomForest_Health_Predictions.csv" : "DecisionTree_Socioeconomic_Predictions.csv";
 
             Promise.all([
                 d3.json("nyct2010.json"),
