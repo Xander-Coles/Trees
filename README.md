@@ -58,11 +58,12 @@ Installation:
 Note: All other supporting graphs are done in Tableau using the NYC Tree Data and American Community Survey Data
 
 Execution: The Cloropleth offers many interactive features that can be tried:
-. Selection of variable in toggle (tree health, predicted tree health, actual poverty percent, tree predicted poverty rate)
-. Selection of borough to be colored (All Boroughs, Queens, Bronx, Manhattan, Brooklyn or Staten Island) for better distribution for sub-municipality analysis.
-. tooltip showing mean of selected variable in census tract which has your mouse on it
-. histogram of distribution of variable in census tract which has your mouse on it (note that some census tract might have no trees surveyd or no one living there for census tract making no color and no distribution vaialable). For actual poverty rate this features will showcase just a text as each census tract has only one povert percent
-. Google Maps API - this includes the ability of showing map, setelite map of locations and possibility of using street view
-. Zoom tool. Zoom is performed when double clickin in map
+1 Selection of variable in toggle (tree health, predicted tree health, actual poverty percent, tree predicted poverty rate)
+2 Selection of borough to be colored (All Boroughs, Queens, Bronx, Manhattan, Brooklyn or Staten Island) for better distribution for sub-municipality analysis.
+3 tooltip showing mean of selected variable in census tract which has your mouse on it
+4 histogram of distribution of variable in census tract which has your mouse on it (note that some census tract might have no trees surveyd or no one living there for census tract making no color and no distribution vaialable). For actual poverty rate this features will showcase just a text as each census tract has only one povert percent
+5 Google Maps API mpas- this includes the ability of showing map, setelite map of locations 
+6 Google Maps API street view - possibility of using street view.
+7 Zoom tool. Zoom is performed when double clickin in map
 
 For extra background on formation of data look for the supporting Top5_Tree_Species_Bar_Graph.html and images from tableau
