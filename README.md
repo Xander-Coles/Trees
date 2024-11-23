@@ -56,6 +56,7 @@ Execution: The Cloropleth offers many interactive features that can be tried:
 4 histogram of distribution of variable in census tract which has your mouse on it (note that some census tract might have no trees surveyd or no one living there for census tract making no color and no distribution vaialable). For actual poverty rate this features will showcase just a text as each census tract has only one povert percent
 5 Google Maps API mpas- this includes the ability of showing map, setelite map of locations 
 6 Google Maps API street view - possibility of using street view.
-7 Zoom tool. Zoom is performed when double clickin in map
+7 Zoom tool. Zoom is performed when double clickin in map.
+8 Color scale of Cloropath map with the selected toggle variable in the bottom left. 
 
 For extra background on formation of data look for the supporting Top5_Tree_Species_Bar_Graph.html and images from tableau
