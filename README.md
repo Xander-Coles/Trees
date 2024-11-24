@@ -12,9 +12,10 @@ Installation:
 2. Click Export in the upper right hand corner, and download as a csv
     
 "#Run Data Cleaning on NYC Tree Data and NYC ACS Census Tract Data"
-1. After having downloaded the NYC Tree Data and NYC ACS Census Tract Data, navigate to the file named "Data_cleaning.ipynb"
-2. Remember to change pd.read_csv('2015_Street_Tree_Census_-_Tree_Data_20241027.csv') because that might not be the name of your file (the name depends on when you download the original tree data set file
-3. Run that file to output a "Trees_Quantified.csv" as well as a "Economic_census.csv"
+1. The NYC ACS Census Tract Data is included in the zip file under the Code folder, with the file named "Demographic_New_York_census_trackt.csv"
+2. After having downloaded the NYC Tree Data and NYC ACS Census Tract Data, navigate to the file named "Data_cleaning.ipynb"
+3. Remember to change pd.read_csv('2015_Street_Tree_Census_-_Tree_Data_20241027.csv') because that might not be the name of your file (the name depends on when you download the original tree data set file
+4. Run that file to output a "Trees_Quantified.csv" as well as a "Economic_census.csv"
 
 "#Run KNN_Poverty.ipynb"
 1. Obtain both "Trees_Quantified.csv" as well as a "Economic_census.csv" in the steps listed above.
@@ -54,9 +55,9 @@ Execution: The Cloropleth offers many interactive features that can be tried:
 2 Selection of borough to be colored (All Boroughs, Queens, Bronx, Manhattan, Brooklyn or Staten Island) for better distribution for sub-municipality analysis.
 3 tooltip showing mean of selected variable in census tract which has your mouse on it
 4 histogram of distribution of variable in census tract which has your mouse on it (note that some census tract might have no trees surveyd or no one living there for census tract making no color and no distribution vaialable). For actual poverty rate this features will showcase just a text as each census tract has only one povert percent
-5 Google Maps API mpas- this includes the ability of showing map, setelite map of locations 
+5 Google Maps API maps- this includes the ability of showing map, setelite map of locations 
 6 Google Maps API street view - possibility of using street view.
 7 Zoom tool. Zoom is performed when double clickin in map.
-8 Color scale of Cloropath map with the selected toggle variable in the bottom left. 
+8 Color scale of Cloropleth map with the selected toggle variable in the bottom left. 
 
 For extra background on formation of data look for the supporting Top5_Tree_Species_Bar_Graph.html and images from tableau
